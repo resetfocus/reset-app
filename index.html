@@ -2,118 +2,114 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>RESET | Focus on You</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RESET — Reclaim Your Focus</title>
 <style>
-:root{--bg:#0b1020;--card:#151d31;--accent:#72f2a4;--text:#f4f7ff;--muted:#9eabc4}
+:root{--bg:#0a1020;--card:#151f33;--line:#293650;--green:#77f2a5;--white:#f5f7ff;--muted:#a3afc5}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,sans-serif}
-header{padding:20px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #28324a}
-.logo{font-size:25px;font-weight:900;color:var(--accent)}
-button,input{font:inherit}
-button{cursor:pointer;border:0;border-radius:10px;padding:11px 14px;background:var(--accent);color:#08140c;font-weight:bold}
-button.secondary{background:#29344d;color:white}
+body{margin:0;background:var(--bg);color:var(--white);font-family:Arial,sans-serif}
+header{padding:16px 20px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}
+.logo{font-size:25px;font-weight:900;color:var(--green);letter-spacing:2px}
 main{max-width:900px;margin:auto;padding:18px}
-.hero{padding:20px 4px}
-h1{font-size:32px;margin-bottom:8px}
-p{color:var(--muted);line-height:1.5}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:18px 0}
-.stat,.card{background:var(--card);padding:17px;border-radius:15px;border:1px solid #26314a}
-.stat strong{display:block;font-size:24px;color:var(--accent);margin-bottom:5px}
-.stat span{font-size:12px;color:var(--muted)}
-section{margin:22px 0}
+button{border:0;border-radius:10px;padding:11px 14px;background:var(--green);color:#07150c;font-weight:bold;cursor:pointer}
+button.secondary{background:#293650;color:white}
+input{font:inherit;background:#0a1020;color:white;border:1px solid var(--line);padding:12px;border-radius:9px;width:100%;margin:8px 0}
+.hero{padding:16px 0}
+h1{font-size:32px;margin:5px 0}
 h2{font-size:20px;margin-top:0}
+p{color:var(--muted);line-height:1.5}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.card,.stat{background:var(--card);border:1px solid var(--line);border-radius:15px;padding:17px}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin:16px 0}
+.stat strong{display:block;font-size:24px;color:var(--green)}
+.stat span{font-size:12px;color:var(--muted)}
 .timer{text-align:center}
-#time{font-size:48px;font-weight:bold;margin:18px 0;color:var(--accent)}
+#time{font-size:48px;font-weight:bold;color:var(--green);margin:18px 0}
 .actions{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
-input{width:100%;padding:12px;border-radius:9px;border:1px solid #35415d;background:#0b1020;color:white;margin:7px 0 10px}
-.item{padding:12px 0;border-bottom:1px solid #303a50;display:flex;align-items:center;gap:10px}
+.item{display:flex;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid var(--line)}
 .item:last-child{border-bottom:0}
-.item input[type=checkbox]{width:19px;height:19px;accent-color:var(--accent);margin:0}
-.item span{flex:1}
-.small{font-size:13px;color:var(--muted)}
-.progress{height:8px;background:#303a50;border-radius:10px;overflow:hidden;margin:12px 0}
-#progress{height:100%;width:0;background:var(--accent);transition:width .2s}
-footer{text-align:center;padding:28px;color:var(--muted);font-size:12px}
-dialog{background:var(--card);color:white;border:1px solid #35415d;border-radius:16px;width:min(90%,420px);padding:22px}
+.item input[type=checkbox]{width:20px;height:20px;margin:0;accent-color:var(--green)}
+.item span{flex:1;overflow-wrap:anywhere}
+.small{font-size:13px}
+.progress{height:8px;background:var(--line);border-radius:10px;overflow:hidden}
+#progress{height:100%;width:0;background:var(--green)}
+section{margin:18px 0}
+.badge{display:inline-block;border-radius:20px;padding:6px 10px;background:#253c34;color:var(--green);font-size:12px;font-weight:bold}
+footer{text-align:center;padding:24px;color:var(--muted);font-size:12px}
+dialog{width:min(90%,420px);background:var(--card);color:white;border:1px solid var(--line);border-radius:16px;padding:22px}
 dialog::backdrop{background:#000b}
-dialog button{margin-top:10px}
-@media(max-width:420px){h1{font-size:27px}.stats{gap:7px}.stat{padding:12px 8px}.stat strong{font-size:21px}main{padding:13px}}
+@media(max-width:420px){main{padding:12px}h1{font-size:27px}#time{font-size:42px}.stat{padding:11px 7px}.stat strong{font-size:21px}}
 </style>
 </head>
 <body>
 <header>
   <div class="logo">RESET.</div>
-  <button class="secondary" id="helpBtn">Help ?</button>
+  <button class="secondary" id="help">Help ?</button>
 </header>
 
 <main>
   <div class="hero">
-    <p>YOUR JOURNEY STARTS NOW</p>
-    <h1>Take back your focus.</h1>
-    <p>Small wins. Better habits. A stronger you. One day at a time.</p>
+    <p>YOUR JOURNEY STARTS HERE</p>
+    <h1 id="greeting">Take back your focus.</h1>
+    <p>Build better habits. Make small wins count.</p>
+    <span class="badge">🔥 <span id="streak">0</span>-day streak</span>
   </div>
 
   <div class="stats">
     <div class="stat"><strong id="xp">0</strong><span>TOTAL XP</span></div>
-    <div class="stat"><strong id="streak">0</strong><span>DAY STREAK</span></div>
     <div class="stat"><strong id="level">1</strong><span>LEVEL</span></div>
+    <div class="stat"><strong id="doneCount">0</strong><span>TODAY'S WINS</span></div>
   </div>
 
   <section class="grid">
     <div class="card timer">
-      <h2>Focus Timer</h2>
-      <p>Give yourself time to do what matters.</p>
+      <h2>⏱️ Focus Timer</h2>
+      <p>Take 25 minutes to focus on one thing.</p>
       <div id="time">25:00</div>
       <div class="actions">
-        <button id="startBtn">Start</button>
-        <button class="secondary" id="pauseBtn">Pause</button>
-        <button class="secondary" id="resetBtn">Reset</button>
+        <button id="start">Start</button>
+        <button class="secondary" id="pause">Pause</button>
+        <button class="secondary" id="reset">Reset</button>
       </div>
-      <p class="small" id="timerStatus">Ready when you are.</p>
+      <p id="timerStatus" class="small">Ready when you are.</p>
     </div>
-
     <div class="card">
-      <h2>Your Profile</h2>
-      <label for="username" class="small">What should we call you?</label>
+      <h2>👤 Your Profile</h2>
+      <label for="username" class="small">Username</label>
       <input id="username" maxlength="30" placeholder="Enter your username">
       <button id="saveProfile">Save profile</button>
-      <p id="profileStatus" class="small">Your journey, your rules.</p>
-      <p class="small">Level up by earning XP from habits and missions.</p>
+      <p id="profileStatus" class="small">Make this journey yours.</p>
     </div>
   </section>
 
   <section class="card">
-    <h2>Habit Garden 🌱</h2>
-    <p>Check off habits as you complete them today. Each habit earns 5 XP.</p>
+    <h2>🌱 Habit Garden</h2>
+    <p>Complete a habit to earn 5 XP. Your daily checklist resets each new day.</p>
     <div id="habits"></div>
   </section>
 
   <section class="card">
-    <h2>Daily Missions 🎯</h2>
-    <p>Choose a small task, complete it, and earn 10 XP.</p>
+    <h2>🎯 Daily Missions</h2>
+    <p>Complete a mission to earn 10 XP.</p>
     <form id="missionForm">
-      <label for="missionInput" class="small">New mission</label>
+      <label for="missionInput" class="small">Add a mission</label>
       <input id="missionInput" maxlength="100" placeholder="e.g. Read for 15 minutes" required>
-      <button type="submit">Add mission</button>
+      <button type="submit">+ Add mission</button>
     </form>
     <div id="missions"></div>
-    <p id="missionEmpty" class="small">Add your first mission above.</p>
+    <p id="emptyMissions" class="small">No missions yet. Add your first one!</p>
   </section>
 
   <section class="card">
-    <h2>Level Progress 🚀</h2>
-    <p id="levelText">0 XP toward your next level</p>
+    <h2>🚀 Level Progress</h2>
+    <p id="levelText">0 / 100 XP to next level</p>
     <div class="progress"><div id="progress"></div></div>
-    <p class="small">Every 100 XP earns one level.</p>
   </section>
 
   <section class="card">
-    <h2>Your Reset Reminder</h2>
-    <p>You don't need to be perfect. Just keep taking the next positive step.</p>
-    <button class="secondary" id="encourageBtn">Give me motivation</button>
-    <p id="motivation"></p>
+    <h2>💚 Daily Motivation</h2>
+    <p id="motivation">You don't have to be perfect. Just keep moving forward.</p>
+    <button class="secondary" id="motivate">Give me motivation</button>
   </section>
 </main>
 
@@ -121,9 +117,9 @@ dialog button{margin-top:10px}
 
 <dialog id="tutorial">
   <h2 id="tutorialTitle">Welcome to RESET 👋</h2>
-  <p id="tutorialText">Build better habits one small win at a time.</p>
+  <p id="tutorialText"></p>
   <div class="actions">
-    <button class="secondary" id="skipTutorial">Close</button>
+    <button class="secondary" id="closeTutorial">Close</button>
     <button id="nextTutorial">Next</button>
   </div>
 </dialog>
@@ -131,664 +127,187 @@ dialog button{margin-top:10px}
 <script>
 (function(){
 "use strict";
-
-const $ = id => document.getElementById(id);
-const STORAGE_KEY = "resetV2";
-const habitNames = [
-  "Wake up on time",
-  "Read or learn something",
-  "Exercise or move",
-  "Limit unnecessary scrolling",
-  "Plan tomorrow"
+const $=id=>document.getElementById(id);
+const KEY="reset_single_page_v1";
+const names=["Wake up on time","Read or learn something","Exercise or move","Limit unnecessary scrolling","Plan tomorrow"];
+const steps=[
+["Welcome to RESET 👋","This is your space to build better habits and make progress."],
+["Focus Timer ⏱️","Start a 25-minute session. Pause or reset whenever you need."],
+["Habit Garden 🌱","Check off habits as you complete them. Each habit earns 5 XP."],
+["Daily Missions 🎯","Add a task and check it off when finished. Each mission earns 10 XP."],
+["XP and streaks 🚀","Earn XP, level up, and return each day to keep your streak going."]
 ];
-
-function todayKey(){
-  const d = new Date();
-  return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+const fresh=()=>({
+ username:"",xp:0,streak:0,lastDay:"",habitDay:day(),
+ habits:names.map((name,i)=>({id:i,name,done:false})),
+ missions:[],nextId:1,tutorialSeen:false
+});
+function day(d=new Date()){
+ return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
 }
-function yesterdayKey(){
-  const d = new Date();
-  d.setDate(d.getDate()-1);
-  return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+function previousDay(){
+ const d=new Date();d.setDate(d.getDate()-1);return day(d);
 }
-function freshState(){
-  return {
-    username:"",
-    xp:0,
-    streak:0,
-    lastActive:"",
-    habitDay:todayKey(),
-    habits:habitNames.map((name,i)=>({id:"h"+i,name,done:false})),
-    missions:[],
-    nextId:1,
-    tutorialSeen:false
-  };
+function load(){
+ try{
+  const raw=localStorage.getItem(KEY);
+  if(raw){
+   const s=JSON.parse(raw);
+   if(s&&typeof s==="object"){
+    const base=fresh();
+    return {...base,...s,habits:Array.isArray(s.habits)?s.habits:base.habits,
+      missions:Array.isArray(s.missions)?s.missions:[]};
+   }
+  }
+ }catch(e){}
+ return fresh();
 }
-function loadState(){
-  try{
-    const saved=JSON.parse(localStorage.getItem(STORAGE_KEY));
-    if(saved && typeof saved==="object"){
-      const base=freshState();
-      return {...base,...saved,
-        habits:Array.isArray(saved.habits)?saved.habits:base.habits,
-        missions:Array.isArray(saved.missions)?saved.missions:[]
-      };
-    }
-  }catch(e){}
-  return freshState();
-}
-let state=loadState();
-let seconds=25*60;
-let timerId=null;
-let tutorialPage=0;
-
+let state=load(),seconds=1500,interval=null,page=0;
 function save(){
-  try{localStorage.setItem(STORAGE_KEY,JSON.stringify(state));}
-  catch(e){console.warn("Could not save progress",e);}
+ try{localStorage.setItem(KEY,JSON.stringify(state));}
+ catch(e){console.warn("Progress could not be saved",e);}
 }
-function updateStreak(){
-  const today=todayKey();
-  if(state.lastActive===today)return;
-  state.streak=state.lastActive===yesterdayKey()?state.streak+1:1;
-  state.lastActive=today;
+function activateDay(){
+ const today=day();
+ if(state.lastDay!==today){
+  state.streak=state.lastDay===previousDay()?state.streak+1:1;
+  state.lastDay=today;
+ }
 }
 function earn(points){
-  state.xp=Math.max(0,state.xp+points);
-  save();
-  renderStats();
+ state.xp=Math.max(0,state.xp+points);
+ save();renderStats();
 }
 function renderStats(){
-  $("xp").textContent=state.xp;
-  $("streak").textContent=state.streak;
-  const level=Math.floor(state.xp/100)+1;
-  $("level").textContent=level;
-  $("levelText").textContent=(state.xp%100)+" / 100 XP toward level "+(level+1);
-  $("progress").style.width=(state.xp%100)+"%";
-}
-function resetHabitsIfNewDay(){
-  if(state.habitDay!==todayKey()){
-    state.habitDay=todayKey();
-    state.habits=habitNames.map((name,i)=>({id:"h"+i,name,done:false}));
-    save();
-  }
+ $("xp").textContent=state.xp;
+ $("level").textContent=Math.floor(state.xp/100)+1;
+ $("streak").textContent=state.streak;
+ const done=state.habits.filter(h=>h.done).length+
+   state.missions.filter(m=>m.done).length;
+ $("doneCount").textContent=done;
+ $("levelText").textContent=(state.xp%100)+" / 100 XP to next level";
+ $("progress").style.width=(state.xp%100)+"%";
+ $("greeting").textContent=state.username?"Welcome back, "+state.username+"!":"Take back your focus.";
 }
 function renderHabits(){
-  const root=$("habits");
-  root.replaceChildren();
-  state.habits.forEach(habit=>{
-    const row=document.createElement("label");
-    row.className="item";
-    const checkbox=document.createElement("input");
-    checkbox.type="checkbox";
-    checkbox.checked=!!habit.done;
-    checkbox.addEventListener("change",()=>{
-      habit.done=checkbox.checked;
-      if(checkbox.checked){
-        earn(5);
-        updateStreak();
-      }else{
-        state.xp=Math.max(0,state.xp-5);
-      }
-      save();
-      renderStats();
-      renderHabits();
-    });
-    const name=document.createElement("span");
-    name.textContent=habit.name;
-    row.append(checkbox,name);
-    root.append(row);
+ const root=$("habits");root.replaceChildren();
+ state.habits.forEach(h=>{
+  const row=document.createElement("label");row.className="item";
+  const cb=document.createElement("input");cb.type="checkbox";cb.checked=!!h.done;
+  cb.addEventListener("change",()=>{
+   h.done=cb.checked;
+   if(h.done){earn(5);activateDay();}
+   else state.xp=Math.max(0,state.xp-5);
+   save();renderAll();
   });
+  const name=document.createElement("span");name.textContent=h.name;
+  row.append(cb,name);root.append(row);
+ });
 }
 function renderMissions(){
-  const root=$("missions");
-  root.replaceChildren();
-  $("missionEmpty").style.display=state.missions.length?"none":"block";
-  state.missions.forEach(mission=>{
-    const row=document.createElement("div");
-    row.className="item";
-    const checkbox=document.createElement("input");
-    checkbox.type="checkbox";
-    checkbox.checked=!!mission.done;
-    checkbox.addEventListener("change",()=>{
-      mission.done=checkbox.checked;
-      if(checkbox.checked){
-        earn(10);
-        updateStreak();
-      }else{
-        state.xp=Math.max(0,state.xp-10);
-      }
-      save();
-      renderStats();
-      renderMissions();
-    });
-    const name=document.createElement("span");
-    name.textContent=mission.text;
-    if(mission.done)name.style.textDecoration="line-through";
-    const remove=document.createElement("button");
-    remove.className="secondary";
-    remove.textContent="×";
-    remove.setAttribute("aria-label","Delete mission");
-    remove.addEventListener("click",()=>{
-      if(mission.done)state.xp=Math.max(0,state.xp-10);
-      state.missions=state.missions.filter(m=>m.id!==mission.id);
-      save();
-      renderAll();
-    });
-    row.append(checkbox,name,remove);
-    root.append(row);
+ const root=$("missions");root.replaceChildren();
+ $("emptyMissions").style.display=state.missions.length?"none":"block";
+ state.missions.forEach(m=>{
+  const row=document.createElement("div");row.className="item";
+  const cb=document.createElement("input");cb.type="checkbox";cb.checked=!!m.done;
+  cb.addEventListener("change",()=>{
+   m.done=cb.checked;
+   if(m.done){earn(10);activateDay();}
+   else state.xp=Math.max(0,state.xp-10);
+   save();renderAll();
   });
+  const name=document.createElement("span");name.textContent=m.text;
+  if(m.done)name.style.textDecoration="line-through";
+  const del=document.createElement("button");del.className="secondary";del.textContent="Delete";
+  del.addEventListener("click",()=>{
+   if(m.done)state.xp=Math.max(0,state.xp-10);
+   state.missions=state.missions.filter(item=>item.id!==m.id);
+   save();renderAll();
+  });
+  row.append(cb,name,del);root.append(row);
+ });
 }
 function renderProfile(){
-  $("username").value=state.username||"";
-  $("profileStatus").textContent=state.username?"Welcome back, "+state.username+"!":"Your journey, your rules.";
+ $("username").value=state.username||"";
+ $("profileStatus").textContent=state.username?"Profile saved. Welcome, "+state.username+"!":"Make this journey yours.";
 }
-function renderAll(){
-  renderStats();
-  renderHabits();
-  renderMissions();
-  renderProfile();
-}
-$("missionForm").addEventListener("submit",event=>{
-  event.preventDefault();
-  const input=$("missionInput");
-  const text=input.value.trim();
-  if(!text)return;
-  state.missions.push({id:state.nextId++,text,done:false});
-  input.value="";
+function renderAll(){renderStats();renderHabits();renderMissions();renderProfile();}
+function resetDailyHabits(){
+ if(state.habitDay!==day()){
+  state.habitDay=day();
+  state.habits=names.map((name,i)=>({id:i,name,done:false}));
   save();
-  renderMissions();
+ }
+}
+function showTime(){
+ $("time").textContent=String(Math.floor(seconds/60)).padStart(2,"0")+":"+
+   String(seconds%60).padStart(2,"0");
+}
+$("start").addEventListener("click",()=>{
+ if(interval!==null)return;
+ if(seconds<=0)seconds=1500;
+ $("timerStatus").textContent="Focus session in progress!";
+ interval=setInterval(()=>{
+  seconds--;showTime();
+  if(seconds<=0){
+   clearInterval(interval);interval=null;
+   $("timerStatus").textContent="Session complete! You earned 10 XP.";
+   earn(10);activateDay();save();renderStats();
+  }
+ },1000);
+});
+$("pause").addEventListener("click",()=>{
+ if(interval!==null)clearInterval(interval);
+ interval=null;$("timerStatus").textContent="Timer paused.";
+});
+$("reset").addEventListener("click",()=>{
+ if(interval!==null)clearInterval(interval);
+ interval=null;seconds=1500;showTime();
+ $("timerStatus").textContent="Timer reset. Ready when you are.";
+});
+$("missionForm").addEventListener("submit",e=>{
+ e.preventDefault();
+ const input=$("missionInput"),text=input.value.trim();
+ if(!text)return;
+ state.missions.push({id:state.nextId++,text,done:false});
+ input.value="";save();renderMissions();renderStats();
 });
 $("saveProfile").addEventListener("click",()=>{
-  state.username=$("username").value.trim().slice(0,30);
-  save();
-  renderProfile();
-  $("profileStatus").textContent="Profile saved!";
+ state.username=$("username").value.trim().slice(0,30);
+ save();renderProfile();renderStats();
+ $("profileStatus").textContent="Profile saved successfully!";
 });
-function showTime(){
-  const mins=Math.floor(seconds/60);
-  const secs=seconds%60;
-  $("time").textContent=String(mins).padStart(2,"0")+":"+String(secs).padStart(2,"0");
-}
-$("startBtn").addEventListener("click",()=>{
-  if(timerId!==null)return;
-  if(seconds<=0)seconds=25*60;
-  $("timerStatus").textContent="Focus mode is on. You've got this!";
-  timerId=setInterval(()=>{
-    seconds--;
-    showTime();
-    if(seconds<=0){
-      clearInterval(timerId);
-      timerId=null;
-      $("timerStatus").textContent="Focus session complete! Great work.";
-      earn(10);
-      updateStreak();
-      save();
-      renderStats();
-    }
-  },1000);
-});
-$("pauseBtn").addEventListener("click",()=>{
-  if(timerId!==null)clearInterval(timerId);
-  timerId=null;
-  $("timerStatus").textContent="Timer paused.";
-});
-$("resetBtn").addEventListener("click",()=>{
-  if(timerId!==null)clearInterval(timerId);
-  timerId=null;
-  seconds=25*60;
-  showTime();
-  $("timerStatus").textContent="Timer reset. Ready when you are.";
-});
-const tutorialSteps=[
-  ["Welcome to RESET 👋","Build better habits one small win at a time."],
-  ["Use your focus timer ⏱️","Start a 25-minute focus session. Pause or reset whenever you need."],
-  ["Grow your Habit Garden 🌱","Check habits as you complete them. Each completed habit earns 5 XP."],
-  ["Complete missions 🎯","Add tasks and check them off for 10 XP each."],
-  ["Track your progress 🚀","Your XP and level are saved on this device. Tap Help any time to see this guide again."]
+const quotes=[
+"One good choice can change the direction of your day.",
+"Progress beats perfection. Keep showing up.",
+"You can always begin again with your next decision.",
+"Focus on the next small step.",
+"Consistency grows from small actions repeated over time."
 ];
+$("motivate").addEventListener("click",()=>{
+ $("motivation").textContent=quotes[Math.floor(Math.random()*quotes.length)];
+});
+function showTutorial(){
+ $("tutorialTitle").textContent=steps[page][0];
+ $("tutorialText").textContent=steps[page][1];
+ $("nextTutorial").textContent=page===steps.length-1?"Finish":"Next";
+}
 function openTutorial(){
-  tutorialPage=0;
-  showTutorialPage();
-  const dialog=$("tutorial");
-  if(typeof dialog.showModal==="function")dialog.showModal();
-  else alert(tutorialSteps.map(s=>s[0]+"\n"+s[1]).join("\n\n"));
+ page=0;showTutorial();
+ if(typeof $("tutorial").showModal==="function")$("tutorial").showModal();
+ else alert(steps.map(s=>s[0]+"\n"+s[1]).join("\n\n"));
 }
-function showTutorialPage(){
-  $("tutorialTitle").textContent=tutorialSteps[tutorialPage][0];
-  $("tutorialText").textContent=tutorialSteps[tutorialPage][1];
-  $("nextTutorial").textContent=tutorialPage===tutorialSteps.length-1?"Finish":"Next";
-}
-$("helpBtn").addEventListener("click",openTutorial);
-$("skipTutorial").addEventListener("click",()=>{
-  $("tutorial").close();
-  state.tutorialSeen=true;
-  save();
+$("help").addEventListener("click",openTutorial);
+$("closeTutorial").addEventListener("click",()=>{
+ $("tutorial").close();state.tutorialSeen=true;save();
 });
 $("nextTutorial").addEventListener("click",()=>{
-  if(tutorialPage<tutorialSteps.length-1){
-    tutorialPage++;
-    showTutorialPage();
-  }else{
-    $("tutorial").close();
-    state.tutorialSeen=true;
-    save();
-  }
+ if(page<steps.length-1){page++;showTutorial();}
+ else{$("tutorial").close();state.tutorialSeen=true;save();}
 });
-const motivations=[
-  "One good choice can change the direction of your day.",
-  "Progress beats perfection. Keep showing up.",
-  "You can start again at any moment.",
-  "Focus on the next small step, not the whole staircase.",
-  "Your habits are built one decision at a time."
-];
-$("encourageBtn").addEventListener("click",()=>{
-  $("motivation").textContent=motivations[Math.floor(Math.random()*motivations.length)];
-});
-
-resetHabitsIfNewDay();
-renderAll();
-showTime();
-
-if(!state.tutorialSeen){
-  setTimeout(openTutorial,300);
-}
-})();
-</script>
-</body>
-</html><!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>RESET | Focus on You</title>
-<style>
-:root{--bg:#0b1020;--card:#151d31;--accent:#72f2a4;--text:#f4f7ff;--muted:#9eabc4}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,sans-serif}
-header{padding:20px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #28324a}
-.logo{font-size:25px;font-weight:900;color:var(--accent)}
-button,input{font:inherit}
-button{cursor:pointer;border:0;border-radius:10px;padding:11px 14px;background:var(--accent);color:#08140c;font-weight:bold}
-button.secondary{background:#29344d;color:white}
-main{max-width:900px;margin:auto;padding:18px}
-.hero{padding:20px 4px}
-h1{font-size:32px;margin-bottom:8px}
-p{color:var(--muted);line-height:1.5}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:18px 0}
-.stat,.card{background:var(--card);padding:17px;border-radius:15px;border:1px solid #26314a}
-.stat strong{display:block;font-size:24px;color:var(--accent);margin-bottom:5px}
-.stat span{font-size:12px;color:var(--muted)}
-section{margin:22px 0}
-h2{font-size:20px;margin-top:0}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
-.timer{text-align:center}
-#time{font-size:48px;font-weight:bold;margin:18px 0;color:var(--accent)}
-.actions{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
-input{width:100%;padding:12px;border-radius:9px;border:1px solid #35415d;background:#0b1020;color:white;margin:7px 0 10px}
-.item{padding:12px 0;border-bottom:1px solid #303a50;display:flex;align-items:center;gap:10px}
-.item:last-child{border-bottom:0}
-.item input[type=checkbox]{width:19px;height:19px;accent-color:var(--accent);margin:0}
-.item span{flex:1}
-.small{font-size:13px;color:var(--muted)}
-.progress{height:8px;background:#303a50;border-radius:10px;overflow:hidden;margin:12px 0}
-#progress{height:100%;width:0;background:var(--accent);transition:width .2s}
-footer{text-align:center;padding:28px;color:var(--muted);font-size:12px}
-dialog{background:var(--card);color:white;border:1px solid #35415d;border-radius:16px;width:min(90%,420px);padding:22px}
-dialog::backdrop{background:#000b}
-dialog button{margin-top:10px}
-@media(max-width:420px){h1{font-size:27px}.stats{gap:7px}.stat{padding:12px 8px}.stat strong{font-size:21px}main{padding:13px}}
-</style>
-</head>
-<body>
-<header>
-  <div class="logo">RESET.</div>
-  <button class="secondary" id="helpBtn">Help ?</button>
-</header>
-
-<main>
-  <div class="hero">
-    <p>YOUR JOURNEY STARTS NOW</p>
-    <h1>Take back your focus.</h1>
-    <p>Small wins. Better habits. A stronger you. One day at a time.</p>
-  </div>
-
-  <div class="stats">
-    <div class="stat"><strong id="xp">0</strong><span>TOTAL XP</span></div>
-    <div class="stat"><strong id="streak">0</strong><span>DAY STREAK</span></div>
-    <div class="stat"><strong id="level">1</strong><span>LEVEL</span></div>
-  </div>
-
-  <section class="grid">
-    <div class="card timer">
-      <h2>Focus Timer</h2>
-      <p>Give yourself time to do what matters.</p>
-      <div id="time">25:00</div>
-      <div class="actions">
-        <button id="startBtn">Start</button>
-        <button class="secondary" id="pauseBtn">Pause</button>
-        <button class="secondary" id="resetBtn">Reset</button>
-      </div>
-      <p class="small" id="timerStatus">Ready when you are.</p>
-    </div>
-
-    <div class="card">
-      <h2>Your Profile</h2>
-      <label for="username" class="small">What should we call you?</label>
-      <input id="username" maxlength="30" placeholder="Enter your username">
-      <button id="saveProfile">Save profile</button>
-      <p id="profileStatus" class="small">Your journey, your rules.</p>
-      <p class="small">Level up by earning XP from habits and missions.</p>
-    </div>
-  </section>
-
-  <section class="card">
-    <h2>Habit Garden 🌱</h2>
-    <p>Check off habits as you complete them today. Each habit earns 5 XP.</p>
-    <div id="habits"></div>
-  </section>
-
-  <section class="card">
-    <h2>Daily Missions 🎯</h2>
-    <p>Choose a small task, complete it, and earn 10 XP.</p>
-    <form id="missionForm">
-      <label for="missionInput" class="small">New mission</label>
-      <input id="missionInput" maxlength="100" placeholder="e.g. Read for 15 minutes" required>
-      <button type="submit">Add mission</button>
-    </form>
-    <div id="missions"></div>
-    <p id="missionEmpty" class="small">Add your first mission above.</p>
-  </section>
-
-  <section class="card">
-    <h2>Level Progress 🚀</h2>
-    <p id="levelText">0 XP toward your next level</p>
-    <div class="progress"><div id="progress"></div></div>
-    <p class="small">Every 100 XP earns one level.</p>
-  </section>
-
-  <section class="card">
-    <h2>Your Reset Reminder</h2>
-    <p>You don't need to be perfect. Just keep taking the next positive step.</p>
-    <button class="secondary" id="encourageBtn">Give me motivation</button>
-    <p id="motivation"></p>
-  </section>
-</main>
-
-<footer>RESET — Progress over perfection.</footer>
-
-<dialog id="tutorial">
-  <h2 id="tutorialTitle">Welcome to RESET 👋</h2>
-  <p id="tutorialText">Build better habits one small win at a time.</p>
-  <div class="actions">
-    <button class="secondary" id="skipTutorial">Close</button>
-    <button id="nextTutorial">Next</button>
-  </div>
-</dialog>
-
-<script>
-(function(){
-"use strict";
-
-const $ = id => document.getElementById(id);
-const STORAGE_KEY = "resetV2";
-const habitNames = [
-  "Wake up on time",
-  "Read or learn something",
-  "Exercise or move",
-  "Limit unnecessary scrolling",
-  "Plan tomorrow"
-];
-
-function todayKey(){
-  const d = new Date();
-  return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
-}
-function yesterdayKey(){
-  const d = new Date();
-  d.setDate(d.getDate()-1);
-  return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
-}
-function freshState(){
-  return {
-    username:"",
-    xp:0,
-    streak:0,
-    lastActive:"",
-    habitDay:todayKey(),
-    habits:habitNames.map((name,i)=>({id:"h"+i,name,done:false})),
-    missions:[],
-    nextId:1,
-    tutorialSeen:false
-  };
-}
-function loadState(){
-  try{
-    const saved=JSON.parse(localStorage.getItem(STORAGE_KEY));
-    if(saved && typeof saved==="object"){
-      const base=freshState();
-      return {...base,...saved,
-        habits:Array.isArray(saved.habits)?saved.habits:base.habits,
-        missions:Array.isArray(saved.missions)?saved.missions:[]
-      };
-    }
-  }catch(e){}
-  return freshState();
-}
-let state=loadState();
-let seconds=25*60;
-let timerId=null;
-let tutorialPage=0;
-
-function save(){
-  try{localStorage.setItem(STORAGE_KEY,JSON.stringify(state));}
-  catch(e){console.warn("Could not save progress",e);}
-}
-function updateStreak(){
-  const today=todayKey();
-  if(state.lastActive===today)return;
-  state.streak=state.lastActive===yesterdayKey()?state.streak+1:1;
-  state.lastActive=today;
-}
-function earn(points){
-  state.xp=Math.max(0,state.xp+points);
-  save();
-  renderStats();
-}
-function renderStats(){
-  $("xp").textContent=state.xp;
-  $("streak").textContent=state.streak;
-  const level=Math.floor(state.xp/100)+1;
-  $("level").textContent=level;
-  $("levelText").textContent=(state.xp%100)+" / 100 XP toward level "+(level+1);
-  $("progress").style.width=(state.xp%100)+"%";
-}
-function resetHabitsIfNewDay(){
-  if(state.habitDay!==todayKey()){
-    state.habitDay=todayKey();
-    state.habits=habitNames.map((name,i)=>({id:"h"+i,name,done:false}));
-    save();
-  }
-}
-function renderHabits(){
-  const root=$("habits");
-  root.replaceChildren();
-  state.habits.forEach(habit=>{
-    const row=document.createElement("label");
-    row.className="item";
-    const checkbox=document.createElement("input");
-    checkbox.type="checkbox";
-    checkbox.checked=!!habit.done;
-    checkbox.addEventListener("change",()=>{
-      habit.done=checkbox.checked;
-      if(checkbox.checked){
-        earn(5);
-        updateStreak();
-      }else{
-        state.xp=Math.max(0,state.xp-5);
-      }
-      save();
-      renderStats();
-      renderHabits();
-    });
-    const name=document.createElement("span");
-    name.textContent=habit.name;
-    row.append(checkbox,name);
-    root.append(row);
-  });
-}
-function renderMissions(){
-  const root=$("missions");
-  root.replaceChildren();
-  $("missionEmpty").style.display=state.missions.length?"none":"block";
-  state.missions.forEach(mission=>{
-    const row=document.createElement("div");
-    row.className="item";
-    const checkbox=document.createElement("input");
-    checkbox.type="checkbox";
-    checkbox.checked=!!mission.done;
-    checkbox.addEventListener("change",()=>{
-      mission.done=checkbox.checked;
-      if(checkbox.checked){
-        earn(10);
-        updateStreak();
-      }else{
-        state.xp=Math.max(0,state.xp-10);
-      }
-      save();
-      renderStats();
-      renderMissions();
-    });
-    const name=document.createElement("span");
-    name.textContent=mission.text;
-    if(mission.done)name.style.textDecoration="line-through";
-    const remove=document.createElement("button");
-    remove.className="secondary";
-    remove.textContent="×";
-    remove.setAttribute("aria-label","Delete mission");
-    remove.addEventListener("click",()=>{
-      if(mission.done)state.xp=Math.max(0,state.xp-10);
-      state.missions=state.missions.filter(m=>m.id!==mission.id);
-      save();
-      renderAll();
-    });
-    row.append(checkbox,name,remove);
-    root.append(row);
-  });
-}
-function renderProfile(){
-  $("username").value=state.username||"";
-  $("profileStatus").textContent=state.username?"Welcome back, "+state.username+"!":"Your journey, your rules.";
-}
-function renderAll(){
-  renderStats();
-  renderHabits();
-  renderMissions();
-  renderProfile();
-}
-$("missionForm").addEventListener("submit",event=>{
-  event.preventDefault();
-  const input=$("missionInput");
-  const text=input.value.trim();
-  if(!text)return;
-  state.missions.push({id:state.nextId++,text,done:false});
-  input.value="";
-  save();
-  renderMissions();
-});
-$("saveProfile").addEventListener("click",()=>{
-  state.username=$("username").value.trim().slice(0,30);
-  save();
-  renderProfile();
-  $("profileStatus").textContent="Profile saved!";
-});
-function showTime(){
-  const mins=Math.floor(seconds/60);
-  const secs=seconds%60;
-  $("time").textContent=String(mins).padStart(2,"0")+":"+String(secs).padStart(2,"0");
-}
-$("startBtn").addEventListener("click",()=>{
-  if(timerId!==null)return;
-  if(seconds<=0)seconds=25*60;
-  $("timerStatus").textContent="Focus mode is on. You've got this!";
-  timerId=setInterval(()=>{
-    seconds--;
-    showTime();
-    if(seconds<=0){
-      clearInterval(timerId);
-      timerId=null;
-      $("timerStatus").textContent="Focus session complete! Great work.";
-      earn(10);
-      updateStreak();
-      save();
-      renderStats();
-    }
-  },1000);
-});
-$("pauseBtn").addEventListener("click",()=>{
-  if(timerId!==null)clearInterval(timerId);
-  timerId=null;
-  $("timerStatus").textContent="Timer paused.";
-});
-$("resetBtn").addEventListener("click",()=>{
-  if(timerId!==null)clearInterval(timerId);
-  timerId=null;
-  seconds=25*60;
-  showTime();
-  $("timerStatus").textContent="Timer reset. Ready when you are.";
-});
-const tutorialSteps=[
-  ["Welcome to RESET 👋","Build better habits one small win at a time."],
-  ["Use your focus timer ⏱️","Start a 25-minute focus session. Pause or reset whenever you need."],
-  ["Grow your Habit Garden 🌱","Check habits as you complete them. Each completed habit earns 5 XP."],
-  ["Complete missions 🎯","Add tasks and check them off for 10 XP each."],
-  ["Track your progress 🚀","Your XP and level are saved on this device. Tap Help any time to see this guide again."]
-];
-function openTutorial(){
-  tutorialPage=0;
-  showTutorialPage();
-  const dialog=$("tutorial");
-  if(typeof dialog.showModal==="function")dialog.showModal();
-  else alert(tutorialSteps.map(s=>s[0]+"\n"+s[1]).join("\n\n"));
-}
-function showTutorialPage(){
-  $("tutorialTitle").textContent=tutorialSteps[tutorialPage][0];
-  $("tutorialText").textContent=tutorialSteps[tutorialPage][1];
-  $("nextTutorial").textContent=tutorialPage===tutorialSteps.length-1?"Finish":"Next";
-}
-$("helpBtn").addEventListener("click",openTutorial);
-$("skipTutorial").addEventListener("click",()=>{
-  $("tutorial").close();
-  state.tutorialSeen=true;
-  save();
-});
-$("nextTutorial").addEventListener("click",()=>{
-  if(tutorialPage<tutorialSteps.length-1){
-    tutorialPage++;
-    showTutorialPage();
-  }else{
-    $("tutorial").close();
-    state.tutorialSeen=true;
-    save();
-  }
-});
-const motivations=[
-  "One good choice can change the direction of your day.",
-  "Progress beats perfection. Keep showing up.",
-  "You can start again at any moment.",
-  "Focus on the next small step, not the whole staircase.",
-  "Your habits are built one decision at a time."
-];
-$("encourageBtn").addEventListener("click",()=>{
-  $("motivation").textContent=motivations[Math.floor(Math.random()*motivations.length)];
-});
-
-resetHabitsIfNewDay();
-renderAll();
-showTime();
-
-if(!state.tutorialSeen){
-  setTimeout(openTutorial,300);
-}
+resetDailyHabits();
+renderAll();showTime();
+if(!state.tutorialSeen)setTimeout(openTutorial,300);
 })();
 </script>
 </body>

@@ -2,494 +2,414 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#080d0b">
 <title>RESET — Take Back Control</title>
 <style>
-:root {
-  --bg:#080d0b;
-  --panel:#101814;
-  --panel2:#151f19;
-  --green:#70f0a0;
-  --green2:#2fbd70;
-  --text:#f2f8f3;
-  --muted:#8d9c91;
-  --border:#24352a;
-  --red:#ff7777;
-  --radius:20px;
-}
+:root{--bg:#080d0b;--panel:#111a14;--panel2:#18231b;--green:#70f0a0;--text:#f2f8f3;--muted:#92a296;--border:#29392d}
 *{box-sizing:border-box}
-body{
-  margin:0;background:var(--bg);color:var(--text);
-  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  line-height:1.5;
-}
-button,input,select{font:inherit}
+body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,sans-serif;line-height:1.5}
+button,input,textarea{font:inherit}
 button{cursor:pointer}
-button:focus-visible,input:focus-visible{
-  outline:2px solid var(--green);outline-offset:3px
-}
-.app{width:min(1100px,100%);margin:auto;padding:22px 17px 100px}
-header{
-  display:flex;justify-content:space-between;align-items:center;
-  gap:12px;margin-bottom:27px
-}
-.brand{display:flex;align-items:center;gap:11px}
-.logo{
-  width:43px;height:43px;border-radius:14px;
-  background:var(--green);color:#061109;
-  display:grid;place-items:center;font-size:25px;font-weight:950
-}
+button:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid var(--green);outline-offset:2px}
+.app{max-width:1000px;margin:auto;padding:18px 14px 55px}
+header{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px;gap:10px}
+.brand{display:flex;align-items:center;gap:10px}
+.logo{display:grid;place-items:center;width:43px;height:43px;background:var(--green);color:#07110a;border-radius:14px;font-size:25px;font-weight:950}
 .brand h1{font-size:21px;letter-spacing:2px;margin:0}
-.brand p{margin:0;color:var(--muted);font-size:11px;letter-spacing:1px}
-.btn{
-  border:1px solid var(--border);border-radius:12px;
-  background:var(--panel2);color:var(--text);
-  padding:10px 14px;font-weight:700;transition:.2s
-}
+.brand small{color:var(--muted);letter-spacing:1px}
+.btn{background:var(--panel2);color:var(--text);border:1px solid var(--border);border-radius:12px;padding:10px 14px;font-weight:750}
 .btn:hover{border-color:var(--green)}
-.btn.primary{background:var(--green);color:#061109;border-color:var(--green)}
+.btn.primary{background:var(--green);color:#07110a;border-color:var(--green)}
 .btn.small{padding:7px 10px;font-size:12px}
-.btn.danger{color:var(--red)}
-.hero{
-  padding:27px 23px;border:1px solid #294a35;border-radius:26px;
-  background:radial-gradient(ellipse at 95% 0%,#1c482c 0%,transparent 48%),
-  linear-gradient(135deg,#13251a,#0d1510);
-  margin-bottom:19px
-}
-.eyebrow{color:var(--green);font-size:11px;font-weight:850;letter-spacing:2px}
-.hero h2{font-size:clamp(27px,5vw,43px);line-height:1.12;
-  letter-spacing:-1.4px;margin:12px 0}
-.hero p{color:#b4c5b8;margin:0 0 18px;max-width:530px}
-.profile-row{display:flex;align-items:center;gap:12px;margin-bottom:19px}
-.avatar{
-  width:54px;height:54px;border-radius:17px;object-fit:cover;
-  background:#20372a;border:1px solid #385440;
-  display:grid;place-items:center;font-size:29px;flex-shrink:0
-}
-.profile-name{font-size:16px;font-weight:850}
-.profile-sub{font-size:12px;color:var(--muted)}
+.hero{padding:25px 21px;border:1px solid #31533b;border-radius:23px;background:radial-gradient(ellipse at 100% 0%,#21452b,transparent 55%),linear-gradient(135deg,#13251a,#0c130e);margin-bottom:16px}
+.eyebrow{font-size:11px;letter-spacing:2px;color:var(--green);font-weight:850}
+.hero h2{font-size:clamp(30px,6vw,44px);line-height:1.1;letter-spacing:-1px;margin:12px 0}
+.hero p{color:#b8c7bb;max-width:520px;font-size:14px}
+.profile{display:flex;align-items:center;gap:12px;margin-bottom:24px}
+.avatar{width:48px;height:48px;display:grid;place-items:center;border-radius:15px;background:#203b28;font-size:26px;overflow:hidden}
+.avatar img{width:100%;height:100%;object-fit:cover}
+.profile-name{font-weight:850}
+.muted{color:var(--muted);font-size:12px}
 .profile-edit{margin-left:auto}
-.grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:16px}
-.card{
-  background:var(--panel);border:1px solid var(--border);
-  border-radius:var(--radius);padding:19px;min-width:0
-}
-.span-12{grid-column:span 12}
-.span-8{grid-column:span 8}
-.span-7{grid-column:span 7}
-.span-6{grid-column:span 6}
-.span-5{grid-column:span 5}
-.span-4{grid-column:span 4}
-.card-head{display:flex;justify-content:space-between;align-items:center;
-  gap:10px;margin-bottom:17px}
-.card h3{margin:0;font-size:16px}
-.card p.sub{font-size:12px;color:var(--muted);margin:5px 0 0}
-.stat-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
-.stat{
-  background:var(--panel2);border:1px solid var(--border);
-  border-radius:15px;padding:15px 12px;min-width:0
-}
+.grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:14px}
+.card{grid-column:span 6;background:var(--panel);border:1px solid var(--border);border-radius:19px;padding:18px;min-width:0}
+.full{grid-column:span 12}
+.card-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:15px}
+.card h3{font-size:16px;margin:0}
+.sub{font-size:12px;color:var(--muted);margin:4px 0 0}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+.stat{background:var(--panel2);border:1px solid var(--border);border-radius:14px;padding:13px 10px;min-width:0}
 .stat-icon{font-size:20px}
-.stat-value{font-size:25px;font-weight:900;letter-spacing:-1px;margin-top:5px}
+.stat-value{font-size:25px;font-weight:900;letter-spacing:-1px;overflow-wrap:anywhere}
 .stat-label{font-size:11px;color:var(--muted)}
-.progress-track{height:8px;border-radius:99px;background:#26342b;overflow:hidden}
-.progress-fill{height:100%;width:0;background:var(--green);
-  border-radius:99px;transition:width .25s}
-.level-row{display:flex;justify-content:space-between;gap:10px;
-  font-size:12px;margin:15px 0 8px}
-.mission,.habit{
-  display:flex;align-items:center;gap:11px;padding:12px 0;
-  border-bottom:1px solid #202d24
-}
-.mission:last-child,.habit:last-child{border-bottom:0}
-.check{
-  width:22px;height:22px;flex-shrink:0;accent-color:var(--green);
-  cursor:pointer
-}
+.progress-label{display:flex;justify-content:space-between;gap:10px;font-size:12px;margin:15px 0 8px}
+.track{height:8px;background:#29382c;border-radius:99px;overflow:hidden}
+.fill{height:100%;width:0;background:var(--green);transition:width .2s}
+.tag{font-size:11px;color:var(--green);background:#183523;padding:5px 8px;border-radius:8px;white-space:nowrap}
+.item{display:flex;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid #233027}
+.item:last-child{border-bottom:0}
+.item input[type=checkbox]{width:21px;height:21px;accent-color:var(--green);flex-shrink:0}
 .item-main{flex:1;min-width:0}
 .item-title{font-size:13px;font-weight:750;overflow-wrap:anywhere}
-.item-meta{font-size:11px;color:var(--muted);margin-top:3px}
-.completed .item-title{text-decoration:line-through;color:var(--muted)}
-.xp-tag{
-  color:var(--green);font-size:11px;font-weight:800;
-  background:#173222;padding:5px 8px;border-radius:9px;white-space:nowrap
-}
-.inline-form{display:flex;gap:8px;margin-top:14px}
-.field{
-  background:#0b120e;border:1px solid var(--border);border-radius:11px;
-  color:var(--text);padding:11px;width:100%;min-width:0
-}
-.field::placeholder{color:#708076}
-.inline-form .field{flex:1}
-.timer{text-align:center;padding:13px 0 5px}
-.timer-ring{
-  width:min(230px,65vw);aspect-ratio:1;border-radius:50%;margin:0 auto 20px;
-  border:7px solid #1b3022;
-  outline:1px solid #294632;outline-offset:5px;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  background:radial-gradient(circle,#14271a,#0b120e 72%)
-}
-.timer-time{font-size:clamp(39px,9vw,55px);font-weight:900;letter-spacing:-2px;
-  font-variant-numeric:tabular-nums}
-.timer-label{font-size:11px;color:var(--green);letter-spacing:2px;font-weight:800}
+.item.completed .item-title{text-decoration:line-through;color:var(--muted)}
+.item-meta{font-size:11px;color:var(--muted)}
+.form-row{display:flex;gap:8px;margin-top:13px}
+.field{width:100%;min-width:0;padding:11px;border-radius:11px;border:1px solid var(--border);background:#0a110c;color:var(--text)}
+.field::placeholder{color:#718075}
+.form-row .field{flex:1}
+.timer{text-align:center;padding:8px 0}
+.timer-ring{width:min(225px,65vw);aspect-ratio:1;margin:0 auto 20px;border-radius:50%;border:7px solid #203b28;outline:1px solid #36543c;outline-offset:4px;display:flex;flex-direction:column;justify-content:center;align-items:center;background:radial-gradient(circle,#14251a,#0a110c 75%)}
+.timer-mode{color:var(--green);font-size:10px;letter-spacing:2px;font-weight:850}
+.timer-time{font-size:clamp(42px,10vw,56px);font-weight:900;letter-spacing:-2px;font-variant-numeric:tabular-nums}
 .timer-actions{display:flex;justify-content:center;gap:8px;flex-wrap:wrap}
-.timer-note{font-size:11px;color:var(--muted);margin-top:13px}
-.empty{text-align:center;color:var(--muted);font-size:13px;padding:17px 0}
-footer{text-align:center;color:#68776d;font-size:11px;margin-top:28px}
+.empty{text-align:center;color:var(--muted);padding:16px 0;font-size:13px}
+footer{text-align:center;color:#738176;font-size:11px;margin-top:25px}
 footer strong{color:var(--green)}
-.overlay{
-  position:fixed;inset:0;background:#000c;z-index:20;
-  display:none;align-items:center;justify-content:center;padding:18px
-}
+.overlay{position:fixed;inset:0;background:#000c;z-index:10;display:none;align-items:center;justify-content:center;padding:17px}
 .overlay.show{display:flex}
-.modal{
-  width:min(430px,100%);max-height:90vh;overflow:auto;
-  background:var(--panel);border:1px solid var(--border);
-  border-radius:23px;padding:23px
-}
-.modal h2{margin:0 0 8px;font-size:23px}
+.modal{background:var(--panel);border:1px solid var(--border);border-radius:21px;padding:22px;width:min(430px,100%);max-height:90vh;overflow:auto}
+.modal h2{margin:0 0 8px}
 .modal p{font-size:13px;color:var(--muted)}
-.modal label{display:block;font-size:12px;color:var(--muted);margin:14px 0 6px}
-.modal-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:20px}
-.avatar-options{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
-.avatar-choice{
-  font-size:24px;padding:8px;border:1px solid var(--border);
-  background:var(--panel2);border-radius:12px
-}
-.avatar-choice.selected{border-color:var(--green);background:#193321}
-.tutorial-step{color:var(--green);font-size:11px;letter-spacing:2px;font-weight:850}
-.tutorial-controls{display:flex;gap:9px;margin-top:20px}
-.tutorial-controls .btn{flex:1}
-.toast{
-  position:fixed;bottom:20px;left:50%;transform:translateX(-50%);
-  background:var(--green);color:#07130a;padding:11px 17px;
-  border-radius:12px;font-weight:800;font-size:13px;
-  z-index:40;display:none;max-width:90%;text-align:center
-}
+.modal label{display:block;font-size:12px;color:var(--muted);margin:12px 0 5px}
+.modal-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:17px}
+.avatar-options{display:flex;gap:8px;flex-wrap:wrap}
+.avatar-choice{font-size:23px;background:var(--panel2);border:1px solid var(--border);border-radius:10px;padding:7px}
+.avatar-choice.selected{border-color:var(--green)}
+.toast{display:none;position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:var(--green);color:#07110a;padding:11px 17px;border-radius:12px;font-weight:800;font-size:13px;z-index:30;max-width:92%;text-align:center}
 .toast.show{display:block}
-.section-label{font-size:10px;letter-spacing:2px;color:var(--muted);
-  font-weight:850;margin:25px 0 12px}
-@media(max-width:650px){
- .app{padding:16px 13px 90px}
- .span-8,.span-7,.span-6,.span-5,.span-4{grid-column:span 12}
- .hero{padding:23px 18px}
- .card{padding:16px}
- .stat-grid{gap:7px}
- .stat{padding:12px 9px}
- .stat-value{font-size:22px}
- header{margin-bottom:19px}
-}
+@media(max-width:650px){.card{grid-column:span 12}.app{padding:15px 12px 40px}.hero{padding:21px 17px}.card{padding:15px}.stat{padding:11px 8px}.stat-value{font-size:22px}}
 </style>
 </head>
 <body>
 <div class="app">
-  <header>
-    <div class="brand">
-      <div class="logo">R</div>
-      <div><h1>RESET</h1><p>TAKE BACK CONTROL</p></div>
-    </div>
-    <button class="btn small" id="helpBtn">? Help</button>
-  </header>
-
-  <section class="hero">
-    <div class="profile-row">
-      <div class="avatar" id="avatarDisplay">🌱</div>
-      <div>
-        <div class="profile-name" id="welcomeName">Your journey starts here</div>
-        <div class="profile-sub" id="profileLevel">Level 1 · Beginner</div>
-      </div>
-      <button class="btn small profile-edit" id="editProfileBtn">Edit</button>
-    </div>
-    <div class="eyebrow">YOUR NEXT CHAPTER STARTS NOW</div>
-    <h2>Small steps.<br>Real change.</h2>
-    <p>You don't have to change everything today. Just make your next choice count.</p>
-    <button class="btn primary" id="startFocusBtn">Start a focus session ↗</button>
-  </section>
-
-  <div class="grid">
-    <section class="card span-12">
-      <div class="card-head">
-        <div><h3>Your progress</h3><p class="sub">Every small win moves you forward.</p></div>
-        <span class="xp-tag" id="todayLabel">TODAY</span>
-      </div>
-      <div class="stat-grid">
-        <div class="stat"><div class="stat-icon">⚡</div><div class="stat-value" id="xpValue">0</div><div class="stat-label">Total XP</div></div>
-        <div class="stat"><div class="stat-icon">🔥</div><div class="stat-value" id="streakValue">0</div><div class="stat-label">Day streak</div></div>
-        <div class="stat"><div class="stat-icon">🏆</div><div class="stat-value" id="levelValue">1</div><div class="stat-label">Current level</div></div>
-      </div>
-      <div class="level-row"><span id="levelText">Level 1 progress</span><span id="xpNext">0 / 100 XP</span></div>
-      <div class="progress-track"><div class="progress-fill" id="levelBar"></div></div>
-    </section>
-
-    <section class="card span-7" id="missionsSection">
-      <div class="card-head">
-        <div><h3>🎯 Daily missions</h3><p class="sub">Complete today's challenges.</p></div>
-        <span class="xp-tag" id="missionCount">0/4</span>
-      </div>
-      <div id="missionsList"></div>
-      <form class="inline-form" id="missionForm">
-        <input class="field" id="missionInput" maxlength="100" placeholder="Add a mission..." required>
-        <button class="btn primary" type="submit">+</button>
-      </form>
-    </section>
-
-    <section class="card span-5" id="timerSection">
-      <div class="card-head">
-        <div><h3>⏱ Focus timer</h3><p class="sub">Give one thing your attention.</p></div>
-      </div>
-      <div class="timer">
-        <div class="timer-ring">
-          <div class="timer-label" id="timerMode">FOCUS TIME</div>
-          <div class="timer-time" id="timerDisplay">25:00</div>
-          <div class="profile-sub" id="timerStatus">Ready when you are</div>
-        </div>
-        <div class="timer-actions">
-          <button class="btn primary" id="timerStart">Start</button>
-          <button class="btn" id="timerReset">Reset</button>
-        </div>
-        <div class="timer-note">One focused session at a time.</div>
-      </div>
-    </section>
-
-    <section class="card span-7" id="habitsSection">
-      <div class="card-head">
-        <div><h3>🌱 Habit Garden</h3><p class="sub">Water your habits with action.</p></div>
-        <span class="xp-tag" id="habitCount">0/5</span>
-      </div>
-      <div id="habitsList"></div>
-      <form class="inline-form" id="habitForm">
-        <input class="field" id="habitInput" maxlength="100" placeholder="Add a healthy habit..." required>
-        <button class="btn primary" type="submit">+</button>
-      </form>
-      <p class="sub">Each completed habit earns 5 XP for today.</p>
-    </section>
-
-    <section class="card span-5">
-      <div class="card-head">
-        <div><h3>🌿 Daily reflection</h3><p class="sub">Check in with yourself.</p></div>
-      </div>
-      <p style="font-size:13px">What's one thing you're proud of today?</p>
-      <textarea id="reflectionInput" class="field" rows="4" maxlength="500" placeholder="Write a few words..."></textarea>
-      <button class="btn primary" id="saveReflection" style="margin-top:10px;width:100%">Save reflection</button>
-      <p class="sub">Your reflection stays on this device.</p>
-    </section>
-
-    <section class="card span-12">
-      <div class="card-head">
-        <div><h3>🛡️ Your reset, your rules</h3><p class="sub">Your journey belongs to you.</p></div>
-      </div>
-      <div style="display:flex;gap:9px;flex-wrap:wrap">
-        <button class="btn" id="exportBtn">Export backup</button>
-        <button class="btn" id="importBtn">Restore backup</button>
-        <input type="file" id="importFile" accept=".json,application/json" hidden>
-        <button class="btn" id="helpBtnBottom">Open tutorial</button>
-      </div>
-      <p class="sub" style="margin-top:13px">Progress is stored in this browser. Export a backup before changing devices or clearing browser data.</p>
-    </section>
+<header>
+  <div class="brand">
+    <div class="logo">R</div>
+    <div><h1>RESET</h1><small>TAKE BACK CONTROL</small></div>
   </div>
-  <footer>BUILT FOR PROGRESS, NOT PERFECTION. <strong>RESET.</strong></footer>
+  <button class="btn small" id="helpBtn">? Help</button>
+</header>
+
+<section class="hero">
+  <div class="profile">
+    <div class="avatar" id="avatarDisplay">🌱</div>
+    <div>
+      <div class="profile-name" id="usernameDisplay">RESET User</div>
+      <div class="muted" id="profileLevel">Level 1 · Beginner</div>
+    </div>
+    <button class="btn small profile-edit" id="editProfile">Edit</button>
+  </div>
+  <div class="eyebrow">YOUR NEXT CHAPTER STARTS NOW</div>
+  <h2>Small steps.<br>Real change.</h2>
+  <p>You don't have to change everything today. Just make your next choice count.</p>
+  <button class="btn primary" id="focusJump">Start a focus session ↗</button>
+</section>
+
+<div class="grid">
+<section class="card full">
+  <div class="card-head"><div><h3>Your progress</h3><p class="sub">Every small win moves you forward.</p></div><span class="tag" id="todayLabel"></span></div>
+  <div class="stats">
+    <div class="stat"><div class="stat-icon">⚡</div><div class="stat-value" id="xpValue">0</div><div class="stat-label">Total XP</div></div>
+    <div class="stat"><div class="stat-icon">🔥</div><div class="stat-value" id="streakValue">0</div><div class="stat-label">Day streak</div></div>
+    <div class="stat"><div class="stat-icon">🏆</div><div class="stat-value" id="levelValue">1</div><div class="stat-label">Level</div></div>
+  </div>
+  <div class="progress-label"><span id="levelText">Level 1 progress</span><span id="xpNext">0 / 100 XP</span></div>
+  <div class="track"><div class="fill" id="levelBar"></div></div>
+</section>
+
+<section class="card" id="missionsSection">
+  <div class="card-head"><div><h3>🎯 Daily missions</h3><p class="sub">Complete today's challenges.</p></div><span class="tag" id="missionCount">0/4</span></div>
+  <div id="missionsList"></div>
+  <form class="form-row" id="missionForm">
+    <input class="field" id="missionInput" maxlength="100" placeholder="Add a mission..." required>
+    <button class="btn primary" type="submit">+</button>
+  </form>
+</section>
+
+<section class="card" id="timerSection">
+  <div class="card-head"><div><h3>⏱ Focus timer</h3><p class="sub">Give one thing your attention.</p></div></div>
+  <div class="timer">
+    <div class="timer-ring"><div class="timer-mode" id="timerMode">FOCUS TIME</div><div class="timer-time" id="timerDisplay">25:00</div><div class="muted" id="timerStatus">Ready when you are</div></div>
+    <div class="timer-actions"><button class="btn primary" id="timerStart">Start</button><button class="btn" id="timerReset">Reset</button></div>
+    <p class="sub">Complete a session to earn XP.</p>
+  </div>
+</section>
+
+<section class="card" id="habitsSection">
+  <div class="card-head"><div><h3>🌱 Habit Garden</h3><p class="sub">Water your habits with action.</p></div><span class="tag" id="habitCount">0/5</span></div>
+  <div id="habitsList"></div>
+  <form class="form-row" id="habitForm">
+    <input class="field" id="habitInput" maxlength="100" placeholder="Add a healthy habit..." required>
+    <button class="btn primary" type="submit">+</button>
+  </form>
+  <p class="sub">Each completed habit earns 5 XP.</p>
+</section>
+
+<section class="card">
+  <div class="card-head"><div><h3>📝 Daily reflection</h3><p class="sub">Check in with yourself.</p></div></div>
+  <label for="reflectionInput" class="sub">What's one thing you're proud of today?</label>
+  <textarea class="field" id="reflectionInput" rows="4" maxlength="500" placeholder="Write a few words..."></textarea>
+  <button class="btn primary" id="saveReflection" style="width:100%;margin-top:10px">Save reflection</button>
+</section>
+
+<section class="card full">
+  <div class="card-head"><div><h3>🛡️ Protect your progress</h3><p class="sub">Make a backup before changing anything.</p></div></div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap">
+    <button class="btn" id="exportBtn">Export backup</button>
+    <button class="btn" id="importBtn">Restore backup</button>
+    <input id="importFile" type="file" accept=".json,application/json" hidden>
+  </div>
+  <p class="sub" style="margin-top:12px">Your progress is stored in this browser. A backup can help you move it to another browser or device.</p>
+</section>
+</div>
+<footer>BUILT FOR PROGRESS, NOT PERFECTION. <strong>RESET.</strong></footer>
 </div>
 
 <div class="overlay" id="profileModal">
-  <div class="modal">
-    <h2>Your profile ✨</h2>
-    <p>Make this journey yours.</p>
-    <label for="usernameInput">Username</label>
-    <input class="field" id="usernameInput" maxlength="30" placeholder="Choose a username">
-    <label>Choose an avatar</label>
-    <div class="avatar-options" id="avatarOptions">
-      <button class="avatar-choice" type="button" data-avatar="🌱">🌱</button>
-      <button class="avatar-choice" type="button" data-avatar="⚡">⚡</button>
-      <button class="avatar-choice" type="button" data-avatar="🦁">🦁</button>
-      <button class="avatar-choice" type="button" data-avatar="🐺">🐺</button>
-      <button class="avatar-choice" type="button" data-avatar="🚀">🚀</button>
-      <button class="avatar-choice" type="button" data-avatar="🌊">🌊</button>
-    </div>
-    <label for="avatarUpload">Or upload a profile picture</label>
-    <input class="field" id="avatarUpload" type="file" accept="image/*">
-    <div class="modal-actions">
-      <button class="btn primary" id="saveProfile">Save profile</button>
-      <button class="btn" id="cancelProfile">Cancel</button>
-    </div>
-  </div>
+<div class="modal">
+<h2>Your profile ✨</h2><p>Make this journey yours.</p>
+<label for="usernameInput">Username</label><input class="field" id="usernameInput" maxlength="30" placeholder="Choose a username">
+<label>Choose an avatar</label>
+<div class="avatar-options" id="avatarOptions">
+<button class="avatar-choice" type="button" data-avatar="🌱">🌱</button>
+<button class="avatar-choice" type="button" data-avatar="⚡">⚡</button>
+<button class="avatar-choice" type="button" data-avatar="🦁">🦁</button>
+<button class="avatar-choice" type="button" data-avatar="🐺">🐺</button>
+<button class="avatar-choice" type="button" data-avatar="🚀">🚀</button>
+<button class="avatar-choice" type="button" data-avatar="🌊">🌊</button>
 </div>
+<div class="modal-actions"><button class="btn primary" id="saveProfile">Save profile</button><button class="btn" id="cancelProfile">Cancel</button></div>
+</div></div>
 
 <div class="overlay" id="tutorialModal">
-  <div class="modal">
-    <div class="tutorial-step" id="tutorialStep">RESET GUIDE · STEP 1 OF 6</div>
-    <h2 id="tutorialTitle">Welcome to RESET 👋</h2>
-    <p id="tutorialText"></p>
-    <div class="tutorial-controls">
-      <button class="btn" id="tutorialSkip">Close</button>
-      <button class="btn primary" id="tutorialNext">Next →</button>
-    </div>
-  </div>
-</div>
-
+<div class="modal">
+<div class="eyebrow" id="tutorialStep">RESET GUIDE</div>
+<h2 id="tutorialTitle">Welcome to RESET 👋</h2>
+<p id="tutorialText"></p>
+<div class="modal-actions"><button class="btn" id="tutorialSkip">Close</button><button class="btn primary" id="tutorialNext">Next →</button></div>
+</div></div>
 <div class="toast" id="toast"></div>
 
 <script>
 (function(){
 "use strict";
 
-const KEY = "resetV2";
-const $ = id => document.getElementById(id);
-const today = () => new Date().toLocaleDateString("en-CA");
-const yesterday = () => {
-  const d = new Date();
-  d.setDate(d.getDate()-1);
-  return d.toLocaleDateString("en-CA");
-};
+/* IMPORTANT: keep the original RESET storage key. */
+const KEY="reset_fixed_2026_v1";
+const TUTORIAL_KEY="reset_fixed_tutorial_v1";
+const $=id=>document.getElementById(id);
+const today=()=>{const d=new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")};
+const shiftDay=n=>{const d=new Date();d.setDate(d.getDate()+n);return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")};
 
-const defaultMissions = [
-  {id:"m1",title:"Complete a 25-minute focus session",xp:20},
-  {id:"m2",title:"Complete one healthy habit",xp:10},
-  {id:"m3",title:"Spend 15 minutes learning",xp:15},
-  {id:"m4",title:"Take a break from social media",xp:15}
+const defaultMissions=[
+{id:"focus",title:"Complete a focus session",xp:20},
+{id:"move",title:"Move your body",xp:10},
+{id:"learn",title:"Learn something new",xp:10},
+{id:"reflect",title:"Reflect on your day",xp:10}
 ];
-const defaultHabits = [
-  {id:"h1",title:"Drink enough water"},
-  {id:"h2",title:"Read or learn something"},
-  {id:"h3",title:"Exercise or stretch"},
-  {id:"h4",title:"Avoid unnecessary scrolling"},
-  {id:"h5",title:"Sleep on time"}
+const defaultHabits=[
+{id:"water",title:"Drink enough water"},
+{id:"reading",title:"Read or learn"},
+{id:"movement",title:"Move your body"},
+{id:"mindful",title:"Be mindful of screen time"},
+{id:"sleep",title:"Prepare for good sleep"}
 ];
 
 function freshState(){
-  return {
-    username:"RESET User",avatar:"🌱",avatarImage:"",
-    xp:0,streak:0,lastActive:"",
-    day:today(),missions:defaultMissions.map(x=>({...x,done:false})),
-    habits:defaultHabits.map(x=>({...x,done:false})),
-    focusSeconds:1500,focusRunning:false,focusCompletedToday:0,
-    reflection:"",tutorialSeen:false,customMissions:[],customHabits:[]
-  };
+return {
+xp:0,streak:0,lastActive:"",day:today(),
+missions:defaultMissions.map(x=>({...x,done:false})),
+habits:defaultHabits.map(x=>({...x,done:false})),
+timerSeconds:1500,timerRunning:false,timerEnd:0,goal:25,
+username:"RESET User",avatar:"🌱",avatarImage:"",
+reflection:"",focusCompletedToday:0
+};
 }
-function loadState(){
-  try{
-    const saved=JSON.parse(localStorage.getItem(KEY)||"null");
-    if(!saved||typeof saved!=="object")return freshState();
-    const s={...freshState(),...saved};
-    s.missions=Array.isArray(saved.missions)&&saved.missions.length
-      ? saved.missions.map((m,i)=>({
-          id:m.id||"m"+i,title:String(m.title||m.text||"Mission"),
-          xp:Number(m.xp)||10,done:!!m.done
-        }))
-      : defaultMissions.map(x=>({...x,done:false}));
-    s.habits=Array.isArray(saved.habits)&&saved.habits.length
-      ? saved.habits.map((h,i)=>({
-          id:h.id||"h"+i,title:String(h.title||h.text||"Habit"),done:!!h.done
-        }))
-      : defaultHabits.map(x=>({...x,done:false}));
-    s.xp=Math.max(0,Number(s.xp)||0);
-    s.streak=Math.max(0,Number(s.streak)||0);
-    s.day=s.day||today();
-    s.focusSeconds=1500;
-    s.focusRunning=false;
-    s.focusCompletedToday=Number(s.focusCompletedToday)||0;
-    return s;
-  }catch(e){return freshState();}
+
+/* Accept both the original RESET schema and the redesign schema. */
+function normaliseItems(value,defaults,type){
+let items=[];
+if(Array.isArray(value))items=value;
+else if(value&&typeof value==="object"){
+items=Object.entries(value).map(([id,v])=>
+typeof v==="object"&&v!==null?{id,...v}:{id,done:!!v});
 }
-let state=loadState();
+const used=new Set();
+const result=items.map((item,i)=>{
+if(!item||typeof item!=="object")return null;
+const id=String(item.id||type+i);
+used.add(id);
+const title=String(item.title||item.text||item.name||"").trim();
+if(!title)return null;
+const done=!!(item.done??item.completed??item.checked);
+return {
+...item,id,title,done,
+xp:type==="mission"?Math.max(0,Number(item.xp)||10):5
+};
+}).filter(Boolean);
+defaults.forEach(d=>{
+if(!used.has(d.id)&&!result.some(x=>x.id===d.id))
+result.push({...d,done:false,xp:d.xp||5});
+});
+return result;
+}
+function readSaved(){
+let raw=null,source=KEY;
+try{
+raw=localStorage.getItem(KEY);
+if(!raw){
+raw=localStorage.getItem("resetV2");
+source="resetV2";
+}
+if(!raw)return {state:freshState(),source:"fresh"};
+const parsed=JSON.parse(raw);
+const saved=parsed&&parsed.state&&parsed.app==="RESET"?parsed.state:parsed;
+if(!saved||typeof saved!=="object")return {state:freshState(),source:"fresh"};
+const s={...freshState(),...saved};
+s.xp=Math.max(0,Number(saved.xp)||0);
+s.streak=Math.max(0,Number(saved.streak)||0);
+s.lastActive=String(saved.lastActive||"");
+s.day=String(saved.day||today());
+s.missions=normaliseItems(saved.missions,defaultMissions,"mission");
+s.habits=normaliseItems(saved.habits,defaultHabits,"habit");
+s.username=String(saved.username||saved.name||"RESET User");
+s.avatar=String(saved.avatar||"🌱");
+s.avatarImage=String(saved.avatarImage||"");
+s.reflection=String(saved.reflection||"");
+s.goal=Math.max(1,Number(saved.goal)||25);
+s.timerSeconds=Math.max(0,Number(saved.timerSeconds??saved.focusSeconds)||1500);
+s.timerEnd=Number(saved.timerEnd)||0;
+s.timerRunning=!!saved.timerRunning;
+if(s.timerRunning&&s.timerEnd){
+s.timerSeconds=Math.max(0,Math.ceil((s.timerEnd-Date.now())/1000));
+}else{
+s.timerRunning=false;
+s.timerEnd=0;
+}
+return {state:s,source};
+}catch(e){
+return {state:freshState(),source:"error"};
+}
+}
+const loaded=readSaved();
+let state=loaded.state;
 let timerInterval=null;
-let selectedAvatar=state.avatar||"🌱";
-let uploadedAvatar="";
+let selectedAvatar=state.avatar;
 let tutorialIndex=0;
 let toastTimeout=null;
 
 function save(){
-  try{localStorage.setItem(KEY,JSON.stringify(state));}
-  catch(e){notify("Couldn't save. Export your progress or free some browser storage.");}
+try{
+localStorage.setItem(KEY,JSON.stringify(state));
+}catch(e){
+notify("Browser storage is full. Export a backup if possible.");
+}
 }
 function notify(message){
-  $("toast").textContent=message;
-  $("toast").classList.add("show");
-  clearTimeout(toastTimeout);
-  toastTimeout=setTimeout(()=>$("toast").classList.remove("show"),2400);
+$("toast").textContent=message;
+$("toast").classList.add("show");
+clearTimeout(toastTimeout);
+toastTimeout=setTimeout(()=>$("toast").classList.remove("show"),2500);
 }
-function safeText(value){
-  return String(value).replace(/[&<>"']/g,c=>({
-    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
-  }[c]));
+function escapeHTML(value){
+return String(value).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 }
 function levelInfo(){
-  const level=Math.floor(state.xp/100)+1;
-  return {level,inside:state.xp%100,needed:100};
-}
-function totalXP(){
-  return state.xp;
+return {level:Math.floor(state.xp/100)+1,inside:state.xp%100};
 }
 function touchActivity(){
-  const t=today();
-  if(state.lastActive!==t){
-    state.streak=state.lastActive===yesterday()?state.streak+1:1;
-    state.lastActive=t;
-  }
+const t=today();
+if(state.lastActive!==t){
+state.streak=state.lastActive===shiftDay(-1)?state.streak+1:1;
+state.lastActive=t;
+}
 }
 function checkDay(){
-  const t=today();
-  if(state.day!==t){
-    state.day=t;
-    state.missions.forEach(m=>m.done=false);
-    state.habits.forEach(h=>h.done=false);
-    state.focusCompletedToday=0;
-    state.reflection="";
-    state.focusSeconds=1500;
-    state.focusRunning=false;
-    save();
-  }
+const t=today();
+if(state.day!==t){
+state.day=t;
+state.missions.forEach(m=>m.done=false);
+state.habits.forEach(h=>h.done=false);
+state.reflection="";
+state.focusCompletedToday=0;
+if(!state.timerRunning)state.timerSeconds=(state.goal||25)*60;
+state.timerRunning=false;
+state.timerEnd=0;
+save();
+}
 }
 function renderProfile(){
-  $("welcomeName").textContent=state.username||"RESET User";
-  const lv=levelInfo();
-  $("profileLevel").textContent="Level "+lv.level+" · "+(lv.level<3?"Beginner":lv.level<6?"Rising":lv.level<10?"Focused":"Unstoppable");
-  const avatar=$("avatarDisplay");
-  if(state.avatarImage){
-    avatar.innerHTML="";
-    const img=document.createElement("img");
-    img.src=state.avatarImage;img.alt="Profile picture";
-    img.style.cssText="width:100%;height:100%;object-fit:cover;border-radius:inherit";
-    avatar.appendChild(img);
-  }else avatar.textContent=state.avatar||"🌱";
+$("usernameDisplay").textContent=state.username||"RESET User";
+const lv=levelInfo();
+$("profileLevel").textContent="Level "+lv.level+" · "+(lv.level<3?"Beginner":lv.level<6?"Rising":lv.level<10?"Focused":"Unstoppable");
+const root=$("avatarDisplay");
+root.innerHTML="";
+if(state.avatarImage){
+const img=document.createElement("img");
+img.src=state.avatarImage;img.alt="Profile picture";root.appendChild(img);
+}else root.textContent=state.avatar||"🌱";
 }
 function renderStats(){
-  const lv=levelInfo();
-  $("xpValue").textContent=totalXP();
-  $("streakValue").textContent=state.streak;
-  $("levelValue").textContent=lv.level;
-  $("levelText").textContent="Level "+lv.level+" progress";
-  $("xpNext").textContent=lv.inside+" / 100 XP";
-  $("levelBar").style.width=lv.inside+"%";
-  $("missionCount").textContent=state.missions.filter(m=>m.done).length+"/"+state.missions.length;
-  $("habitCount").textContent=state.habits.filter(h=>h.done).length+"/"+state.habits.length;
-  $("todayLabel").textContent=new Date().toLocaleDateString(undefined,{weekday:"short",month:"short",day:"numeric"}).toUpperCase();
+const lv=levelInfo();
+$("xpValue").textContent=state.xp;
+$("streakValue").textContent=state.streak;
+$("levelValue").textContent=lv.level;
+$("levelText").textContent="Level "+lv.level+" progress";
+$("xpNext").textContent=lv.inside+" / 100 XP";
+$("levelBar").style.width=lv.inside+"%";
+$("missionCount").textContent=state.missions.filter(m=>m.done).length+"/"+state.missions.length;
+$("habitCount").textContent=state.habits.filter(h=>h.done).length+"/"+state.habits.length;
+$("todayLabel").textContent=new Date().toLocaleDateString(undefined,{month:"short",day:"numeric"}).toUpperCase();
 }
-function renderMissions(){
-  const root=$("missionsList");root.innerHTML="";
-  if(!state.missions.length){root.innerHTML='<div class="empty">Add your first mission above.</div>';return;}
-  state.missions.forEach(m=>{
-    const row=document.createElement("div");
-    row.className="mission"+(m.done?" completed":"");
-    row.innerHTML=`
-      <input class="check" type="checkbox" ${m.done?"checked":""} aria-label="Complete mission">
-      <div class="item-main"><div class="item-title">${safeText(m.title)}</div>
-      <div class="item-meta">Daily mission</div></div>
-      <span class="xp-tag">+${m.xp} XP</span>
-      <button class="btn small danger" aria-label="Delete mission">×</button>`;
-    row.querySelector(".check").addEventListener("change",e=>toggleMission(m.id,e.target.checked));
-    row.querySelector(".danger").addEventListener("click",()=>deleteMission(m.id));
-    root.appendChild(row);
-  });
+function renderItems(rootId,items,type){
+const root=$(rootId);root.innerHTML="";
+if(!items.length){root.innerHTML='<div class="empty">Nothing here yet. Add one below.</div>';return;}
+items.forEach(item=>{
+const row=document.createElement("div");
+row.className="item"+(item.done?" completed":"");
+row.innerHTML='<input type="checkbox" aria-label="Complete item" '+(item.done?"checked":"")+'>'+
+'<div class="item-main"><div class="item-title">'+escapeHTML(item.title)+'</div><div class="item-meta">'+(item.done?"Completed today":"One step at a time")+'</div></div>'+
+'<span class="tag">+'+(type==="mission"?item.xp:5)+' XP</span>'+
+'<button class="btn small delete" aria-label="Delete item">×</button>';
+row.querySelector('input').addEventListener("change",e=>{
+if(type==="mission")toggleMission(item.id,e.target.checked);
+else toggleHabit(item.id,e.target.checked);
+});
+row.querySelector(".delete").addEventListener("click",()=>{
+if(!confirm("Delete this "+type+"?"))return;
+if(item.done)state.xp=Math.max(0,state.xp-(type==="mission"?item.xp:5));
+if(type==="mission")state.missions=state.missions.filter(x=>x.id!==item.id);
+else state.habits=state.habits.filter(x=>x.id!==item.id);
+save();render();notify("Removed.");
+});
+root.appendChild(row);
+});
 }
-function renderHabits(){
-  const root=$("habitsList");root.innerHTML="";
-  if(!state.habits.length){root.innerHTML='<div class="empty">Add your first habit above.</div>';return;}
-  state.habits.forEach(h=>{
-    const row=document.createElement("div");
-    row.className="habit"+(h.done?" completed":"");
-    row.innerHTML=`
-      <input class="check" type="checkbox" ${h.done?"checked":""} aria-label="Complete habit">
-      <div class="item-main"><div class="item-title">${safeText(h.title)}</div>
-      <div class="item-meta">${h.done?"Nice work today!":"A small step counts."}</div></div>
-      <span class="xp-tag"
+function renderTimer(){
+let seconds=state.timerSeconds;
+if(state.timerRunning&&state.timerEnd)seconds=Math.max(0,Math.ceil((state.timerEnd-Date.now())/1000));
+const mins=Math.floor(seconds/60),secs=seconds%60;
+$("timerDisplay").textContent=String(mins).padStart(2,"0")+":"+String(secs).padStart(2,"0");
+$("timerStart").textContent=state.timerRunning?"Pause":seconds<(state.goal||25)*60?"Resume":"Start";
+$("timerStatus").textContent=state.timerRunning?"Stay in the zone":seconds===0?"Session complete":seconds===(state.goal||25)*60?"Ready when you are":"Paused";
+$("timerMode").textContent=seconds===0?"SESSION COMPLETE":"FOCUS TIME";
+}
+function render(){
+renderProfile();renderStats();
+renderItems("missionsList",state.missions,"mission");
+renderItems("habitsList",state.habits,"habit");
+renderTimer();
+$("reflectionInput").value=state.reflection||"";
+}
+function refresh(){checkDay();render();}
+
+function toggleMission(id,done){
+const item=state.missions.find(x=>x.id===id);if(!item||item.done===done)return;
+item.done=done;
+state.xp=Math.max(0,state.xp+(done?item.xp:-item.xp));
+if(done){touchActivity();notify("Mission complete! +"+item.xp+" XP 🎉");}
+save();render();
+}
+function toggleHabit(id,done){
+const item=state.habits.find(x=>x.id===id);

@@ -33,14 +33,21 @@ p{color:var(--muted);line-height:1.5}
 .item span{flex:1;overflow-wrap:anywhere}
 .small{font-size:13px}
 .progress{height:8px;background:var(--line);border-radius:10px;overflow:hidden}
-#progress{height:100%;width:0;background:var(--green)}
+#progress,#challengeProgress{height:100%;width:0;background:var(--green)}
 section{margin:18px 0}
 .badge{display:inline-block;border-radius:20px;padding:6px 10px;background:#253c34;color:var(--green);font-size:12px;font-weight:bold}
 .challenge-day{padding:13px 0;border-bottom:1px solid var(--line)}
-.challenge-day:last-child{border-bottom:0}
 .challenge-day h3{font-size:16px;margin:0 0 6px}
 .challenge-day p{margin:5px 0 10px}
 .challenge-status{font-size:12px;color:var(--muted)}
+.badge-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
+.achievement{border:1px solid var(--line);border-radius:13px;padding:14px;text-align:center;background:#101a2c}
+.achievement.unlocked{border-color:var(--green);background:#192c2b}
+.achievement-icon{font-size:30px;margin-bottom:8px}
+.achievement h3{font-size:14px;margin:5px 0}
+.achievement p{font-size:12px;margin:5px 0}
+.achievement-status{font-size:11px;color:var(--muted)}
+.achievement.unlocked .achievement-status{color:var(--green)}
 footer{text-align:center;padding:24px;color:var(--muted);font-size:12px}
 dialog{width:min(90%,420px);background:var(--card);color:white;border:1px solid var(--line);border-radius:16px;padding:22px}
 dialog::backdrop{background:#000b}
@@ -109,14 +116,19 @@ dialog::backdrop{background:#000b}
 
   <section class="card" id="challenge">
     <h2>🚀 7-Day RESET Challenge</h2>
-    <p>One small goal each day. Complete today's goal to earn 20 XP. Finish all seven days at your own pace.</p>
-    <div class="progress">
-      <div id="challengeProgress" style="height:100%;width:0;background:var(--green)"></div>
-    </div>
+    <p>One small goal each day. Complete today's goal to earn 20 XP.</p>
+    <div class="progress"><div id="challengeProgress"></div></div>
     <p id="challengeSummary" class="small">Day 1 of 7 · 0 completed</p>
     <div id="challengeDays"></div>
     <p id="challengeMessage" class="small">Start small. Keep going.</p>
     <button class="secondary" id="restartChallenge" style="display:none">Start challenge again</button>
+  </section>
+
+  <section class="card" id="achievements">
+    <h2>🏆 RESET Achievements</h2>
+    <p>Keep making progress to unlock badges. Your unlocked badges are saved.</p>
+    <p id="badgeSummary" class="small">0 of 7 badges unlocked</p>
+    <div id="badgeGrid" class="badge-grid"></div>
   </section>
 
   <section class="card">
@@ -159,34 +171,23 @@ const names = [
 ];
 
 const challengeGoals = [
-  {
-    title:"Day 1: Start small",
-    text:"Do one 10-minute focus session. You can use RESET's timer or any timer."
-  },
-  {
-    title:"Day 2: Put one task first",
-    text:"Finish one important task before entertainment or scrolling."
-  },
-  {
-    title:"Day 3: Three small wins",
-    text:"Choose and complete three small, realistic goals today."
-  },
-  {
-    title:"Day 4: Focus time",
-    text:"Spend 15 minutes studying, reading, or learning with distractions put aside."
-  },
-  {
-    title:"Day 5: Begin the task",
-    text:"Start a task you've been putting off. Work on it for at least 10 minutes."
-  },
-  {
-    title:"Day 6: Build your routine",
-    text:"Complete two habits or missions that support the person you want to become."
-  },
-  {
-    title:"Day 7: Reflect and reset",
-    text:"Think about one thing that went well and choose one goal for next week."
-  }
+  {title:"Day 1: Start small",text:"Do one 10-minute focus session."},
+  {title:"Day 2: Put one task first",text:"Finish one important task before entertainment or scrolling."},
+  {title:"Day 3: Three small wins",text:"Choose and complete three small, realistic goals today."},
+  {title:"Day 4: Focus time",text:"Spend 15 minutes studying, reading, or learning with distractions put aside."},
+  {title:"Day 5: Begin the task",text:"Start a task you've been putting off. Work on it for at least 10 minutes."},
+  {title:"Day 6: Build your routine",text:"Complete two habits or missions that support your goals."},
+  {title:"Day 7: Reflect and reset",text:"Think about one thing that went well and choose one goal for next week."}
+];
+
+const achievements = [
+  {id:"first",icon:"🌱",name:"First Win",description:"Earn at least 5 XP.",test:s=>s.xp>=5},
+  {id:"focus",icon:"⏱️",name:"Focus Starter",description:"Finish your first focus timer.",test:s=>s.focusSessions>=1},
+  {id:"missions",icon:"🎯",name:"Mission Maker",description:"Complete 3 different missions.",test:s=>s.missionsCompleted>=3},
+  {id:"habits",icon:"🌿",name:"Habit Hero",description:"Complete 5 habits.",test:s=>s.habitsCompleted>=5},
+  {id:"century",icon:"💯",name:"Century Club",description:"Reach 100 XP.",test:s=>s.xp>=100},
+  {id:"challenge",icon:"🚀",name:"Challenge Champion",description:"Finish all 7 challenge days.",test:s=>s.challengeFinished===true},
+  {id:"level5",icon:"👑",name:"Level 5",description:"Reach Level 5 (400 XP).",test:s=>s.xp>=400}
 ];
 
 const steps = [
@@ -195,21 +196,22 @@ const steps = [
   ["Habit Garden 🌱","Check off habits as you complete them. Each habit earns 5 XP."],
   ["Daily Missions 🎯","Add a task and check it off when finished. Each mission earns 10 XP."],
   ["7-Day Challenge 🚀","Complete one small daily goal and earn 20 XP for each day you finish."],
+  ["Achievements 🏆","Unlock badges as you build habits, complete missions, and earn XP."],
   ["XP and streaks 🚀","Earn XP, level up, and return each day to keep your streak going."]
 ];
 
-function day(d = new Date()){
+function day(d=new Date()){
   return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
 }
 
 function tomorrow(){
-  const d = new Date();
+  const d=new Date();
   d.setDate(d.getDate()+1);
   return day(d);
 }
 
 function previousDay(){
-  const d = new Date();
+  const d=new Date();
   d.setDate(d.getDate()-1);
   return day(d);
 }
@@ -227,22 +229,29 @@ const fresh = () => ({
   challengeDay:1,
   challengeDone:[],
   challengeFinished:false,
-  challengeAvailableDate:""
+  challengeAvailableDate:"",
+  focusSessions:0,
+  missionsCompleted:0,
+  habitsCompleted:0,
+  completedHabitKeys:[],
+  unlockedBadges:[]
 });
 
 function load(){
   try{
-    const raw = localStorage.getItem(KEY);
+    const raw=localStorage.getItem(KEY);
     if(raw){
-      const s = JSON.parse(raw);
-      if(s && typeof s === "object"){
-        const base = fresh();
+      const s=JSON.parse(raw);
+      if(s&&typeof s==="object"){
+        const base=fresh();
         return {
           ...base,
           ...s,
           habits:Array.isArray(s.habits)?s.habits:base.habits,
           missions:Array.isArray(s.missions)?s.missions:[],
-          challengeDone:Array.isArray(s.challengeDone)?s.challengeDone:[]
+          challengeDone:Array.isArray(s.challengeDone)?s.challengeDone:[],
+          completedHabitKeys:Array.isArray(s.completedHabitKeys)?s.completedHabitKeys:[],
+          unlockedBadges:Array.isArray(s.unlockedBadges)?s.unlockedBadges:[]
         };
       }
     }
@@ -250,10 +259,10 @@ function load(){
   return fresh();
 }
 
-let state = load();
-let seconds = 1500;
-let interval = null;
-let page = 0;
+let state=load();
+let seconds=1500;
+let interval=null;
+let page=0;
 
 function save(){
   try{
@@ -264,112 +273,132 @@ function save(){
 }
 
 function activateDay(){
-  const today = day();
-  if(state.lastDay !== today){
-    state.streak = state.lastDay === previousDay() ? state.streak+1 : 1;
-    state.lastDay = today;
+  const today=day();
+  if(state.lastDay!==today){
+    state.streak=state.lastDay===previousDay()?state.streak+1:1;
+    state.lastDay=today;
   }
 }
 
+function unlockAchievements(){
+  let changed=false;
+
+  achievements.forEach(a=>{
+    if(a.test(state)&&!state.unlockedBadges.includes(a.id)){
+      state.unlockedBadges.push(a.id);
+      changed=true;
+    }
+  });
+
+  if(changed)save();
+}
+
 function earn(points){
-  state.xp = Math.max(0,state.xp+points);
+  state.xp=Math.max(0,state.xp+points);
+  unlockAchievements();
   save();
   renderStats();
+  renderAchievements();
 }
 
 function renderStats(){
-  $("xp").textContent = state.xp;
-  $("level").textContent = Math.floor(state.xp/100)+1;
-  $("streak").textContent = state.streak;
+  $("xp").textContent=state.xp;
+  $("level").textContent=Math.floor(state.xp/100)+1;
+  $("streak").textContent=state.streak;
 
-  const done = state.habits.filter(h=>h.done).length +
+  const done=state.habits.filter(h=>h.done).length+
     state.missions.filter(m=>m.done).length;
 
-  $("doneCount").textContent = done;
-  $("levelText").textContent = (state.xp%100)+" / 100 XP to next level";
-  $("progress").style.width = (state.xp%100)+"%";
+  $("doneCount").textContent=done;
+  $("levelText").textContent=(state.xp%100)+" / 100 XP to next level";
+  $("progress").style.width=(state.xp%100)+"%";
 
-  $("greeting").textContent = state.username
-    ? "Welcome back, "+state.username+"!"
-    : "Take back your focus.";
+  $("greeting").textContent=state.username
+    ?"Welcome back, "+state.username+"!"
+    :"Take back your focus.";
 }
 
 function renderHabits(){
-  const root = $("habits");
+  const root=$("habits");
   root.replaceChildren();
 
   state.habits.forEach(h=>{
-    const row = document.createElement("label");
-    row.className = "item";
+    const row=document.createElement("label");
+    row.className="item";
 
-    const cb = document.createElement("input");
-    cb.type = "checkbox";
-    cb.checked = !!h.done;
+    const cb=document.createElement("input");
+    cb.type="checkbox";
+    cb.checked=!!h.done;
 
     cb.addEventListener("change",()=>{
-      h.done = cb.checked;
+      h.done=cb.checked;
 
       if(h.done){
-        earn(5);
+        const key=day()+":"+h.id;
+        if(!state.completedHabitKeys.includes(key)){
+          state.completedHabitKeys.push(key);
+          state.habitsCompleted++;
+        }
         activateDay();
+        earn(5);
       }else{
-        state.xp = Math.max(0,state.xp-5);
+        state.xp=Math.max(0,state.xp-5);
+        save();
       }
 
-      save();
       renderAll();
     });
 
-    const name = document.createElement("span");
-    name.textContent = h.name;
-
+    const name=document.createElement("span");
+    name.textContent=h.name;
     row.append(cb,name);
     root.append(row);
   });
 }
 
 function renderMissions(){
-  const root = $("missions");
+  const root=$("missions");
   root.replaceChildren();
 
-  $("emptyMissions").style.display =
-    state.missions.length ? "none" : "block";
+  $("emptyMissions").style.display=state.missions.length?"none":"block";
 
   state.missions.forEach(m=>{
-    const row = document.createElement("div");
-    row.className = "item";
+    const row=document.createElement("div");
+    row.className="item";
 
-    const cb = document.createElement("input");
-    cb.type = "checkbox";
-    cb.checked = !!m.done;
+    const cb=document.createElement("input");
+    cb.type="checkbox";
+    cb.checked=!!m.done;
 
     cb.addEventListener("change",()=>{
-      m.done = cb.checked;
+      m.done=cb.checked;
 
       if(m.done){
-        earn(10);
+        if(!m.everCompleted){
+          m.everCompleted=true;
+          state.missionsCompleted++;
+        }
         activateDay();
+        earn(10);
       }else{
-        state.xp = Math.max(0,state.xp-10);
+        state.xp=Math.max(0,state.xp-10);
+        save();
       }
 
-      save();
       renderAll();
     });
 
-    const name = document.createElement("span");
-    name.textContent = m.text;
+    const name=document.createElement("span");
+    name.textContent=m.text;
+    if(m.done)name.style.textDecoration="line-through";
 
-    if(m.done) name.style.textDecoration = "line-through";
-
-    const del = document.createElement("button");
-    del.className = "secondary";
-    del.textContent = "Delete";
+    const del=document.createElement("button");
+    del.className="secondary";
+    del.textContent="Delete";
 
     del.addEventListener("click",()=>{
-      if(m.done) state.xp = Math.max(0,state.xp-10);
-
-      state.missions = state.missions.filter(item=>item.id!==m.id);
+      if(m.done)state.xp=Math.max(0,state.xp-10);
+      state.missions=state.missions.filter(item=>item.id!==m.id);
       save();
       renderAll();
     });
@@ -380,114 +409,133 @@ function renderMissions(){
 }
 
 function renderProfile(){
-  $("username").value = state.username || "";
-
-  $("profileStatus").textContent = state.username
-    ? "Profile saved. Welcome, "+state.username+"!"
-    : "Make this journey yours.";
+  $("username").value=state.username||"";
+  $("profileStatus").textContent=state.username
+    ?"Profile saved. Welcome, "+state.username+"!"
+    :"Make this journey yours.";
 }
 
 function renderChallenge(){
-  // Unlock the next challenge day only when the next calendar day arrives.
   if(
-    !state.challengeFinished &&
-    state.challengeAvailableDate &&
-    day() >= state.challengeAvailableDate
+    !state.challengeFinished&&
+    state.challengeAvailableDate&&
+    day()>=state.challengeAvailableDate
   ){
-    state.challengeDay = Math.min(state.challengeDone.length+1,7);
-    state.challengeAvailableDate = "";
+    state.challengeDay=Math.min(state.challengeDone.length+1,7);
+    state.challengeAvailableDate="";
     save();
   }
 
-  const root = $("challengeDays");
+  const root=$("challengeDays");
   root.replaceChildren();
 
-  const completed = state.challengeDone.length;
+  const completed=state.challengeDone.length;
+  $("challengeProgress").style.width=(completed/7*100)+"%";
 
-  $("challengeProgress").style.width = (completed/7*100)+"%";
+  $("challengeSummary").textContent=state.challengeFinished
+    ?"Challenge complete! 7 of 7 days finished 🎉"
+    :"Day "+Math.min(state.challengeDay,7)+" of 7 · "+completed+" completed";
 
-  $("challengeSummary").textContent = state.challengeFinished
-    ? "Challenge complete! 7 of 7 days finished 🎉"
-    : "Day "+Math.min(state.challengeDay,7)+" of 7 · "+completed+" completed";
-
-  if(state.challengeFinished){
-    $("challengeMessage").textContent =
-      "Amazing work! Take a moment to celebrate your progress.";
-  }else if(state.challengeDone.includes(state.challengeDay)){
-    $("challengeMessage").textContent =
-      "Today's goal is complete. Come back tomorrow for your next goal!";
-  }else{
-    $("challengeMessage").textContent =
-      "Focus on today's goal. Small steps count.";
-  }
+  $("challengeMessage").textContent=state.challengeFinished
+    ?"Amazing work! Celebrate your progress."
+    :state.challengeDone.includes(state.challengeDay)
+      ?"Today's goal is complete. Come back tomorrow for your next goal!"
+      :"Focus on today's goal. Small steps count.";
 
   challengeGoals.forEach((goal,index)=>{
-    const dayNum = index+1;
-    const done = state.challengeDone.includes(dayNum);
-    const current = dayNum===state.challengeDay &&
-      !state.challengeFinished &&
-      !done;
+    const n=index+1;
+    const done=state.challengeDone.includes(n);
+    const current=n===state.challengeDay&&!state.challengeFinished&&!done;
 
-    const box = document.createElement("div");
-    box.className = "challenge-day";
+    const box=document.createElement("div");
+    box.className="challenge-day";
 
-    const heading = document.createElement("h3");
-    heading.textContent = goal.title+(done?" ✓":"");
+    const heading=document.createElement("h3");
+    heading.textContent=goal.title+(done?" ✓":"");
 
-    const description = document.createElement("p");
-    description.textContent = goal.text;
+    const description=document.createElement("p");
+    description.textContent=goal.text;
 
-    const status = document.createElement("p");
-    status.className = "challenge-status";
+    const status=document.createElement("p");
+    status.className="challenge-status";
 
-    const button = document.createElement("button");
+    const button=document.createElement("button");
 
     if(done){
-      status.textContent = "Completed · 20 XP earned";
-      button.textContent = "Completed";
-      button.className = "secondary";
-      button.disabled = true;
+      status.textContent="Completed · 20 XP earned";
+      button.textContent="Completed";
+      button.className="secondary";
+      button.disabled=true;
     }else if(current){
-      status.textContent = "Today's goal";
-      button.textContent = "Complete today's goal (+20 XP)";
+      status.textContent="Today's goal";
+      button.textContent="Complete today's goal (+20 XP)";
 
       button.addEventListener("click",()=>{
-        if(
-          state.challengeDone.includes(dayNum) ||
-          state.challengeFinished
-        ) return;
+        if(state.challengeDone.includes(n)||state.challengeFinished)return;
 
-        state.challengeDone.push(dayNum);
-        state.xp += 20;
+        state.challengeDone.push(n);
+        state.xp+=20;
         activateDay();
 
-        if(dayNum===7){
-          state.challengeFinished = true;
+        if(n===7){
+          state.challengeFinished=true;
         }else{
-          state.challengeAvailableDate = tomorrow();
+          state.challengeAvailableDate=tomorrow();
         }
 
+        unlockAchievements();
         save();
         renderAll();
       });
-    }else if(state.challengeFinished){
-      status.textContent = "Challenge complete";
-      button.textContent = "Finished";
-      button.className = "secondary";
-      button.disabled = true;
     }else{
-      status.textContent = "Unlocks when it's time for this day's goal";
-      button.textContent = "Locked";
-      button.className = "secondary";
-      button.disabled = true;
+      status.textContent=state.challengeFinished
+        ?"Challenge complete"
+        :"Unlocks when it's time for this day's goal";
+      button.textContent=state.challengeFinished?"Finished":"Locked";
+      button.className="secondary";
+      button.disabled=true;
     }
 
     box.append(heading,description,status,button);
     root.append(box);
   });
 
-  $("restartChallenge").style.display =
-    state.challengeFinished ? "inline-block" : "none";
+  $("restartChallenge").style.display=
+    state.challengeFinished?"inline-block":"none";
+}
+
+function renderAchievements(){
+  unlockAchievements();
+
+  const root=$("badgeGrid");
+  root.replaceChildren();
+
+  achievements.forEach(a=>{
+    const unlocked=state.unlockedBadges.includes(a.id);
+
+    const box=document.createElement("div");
+    box.className="achievement"+(unlocked?" unlocked":"");
+
+    const icon=document.createElement("div");
+    icon.className="achievement-icon";
+    icon.textContent=unlocked?a.icon:"🔒";
+
+    const title=document.createElement("h3");
+    title.textContent=a.name;
+
+    const description=document.createElement("p");
+    description.textContent=a.description;
+
+    const status=document.createElement("div");
+    status.className="achievement-status";
+    status.textContent=unlocked?"UNLOCKED ✓":"NOT UNLOCKED YET";
+
+    box.append(icon,title,description,status);
+    root.append(box);
+  });
+
+  $("badgeSummary").textContent=
+    state.unlockedBadges.length+" of "+achievements.length+" badges unlocked";
 }
 
 function renderAll(){
@@ -496,157 +544,88 @@ function renderAll(){
   renderMissions();
   renderProfile();
   renderChallenge();
+  renderAchievements();
 }
 
 function resetDailyHabits(){
   if(state.habitDay!==day()){
-    state.habitDay = day();
-    state.habits = names.map((name,i)=>({id:i,name,done:false}));
+    state.habitDay=day();
+    state.habits=names.map((name,i)=>({id:i,name,done:false}));
     save();
   }
 }
 
 function showTime(){
-  $("time").textContent =
+  $("time").textContent=
     String(Math.floor(seconds/60)).padStart(2,"0")+":"+
     String(seconds%60).padStart(2,"0");
 }
 
 $("start").addEventListener("click",()=>{
-  if(interval!==null) return;
-  if(seconds<=0) seconds=1500;
+  if(interval!==null)return;
+  if(seconds<=0)seconds=1500;
 
-  $("timerStatus").textContent = "Focus session in progress!";
+  $("timerStatus").textContent="Focus session in progress!";
 
-  interval = setInterval(()=>{
+  interval=setInterval(()=>{
     seconds--;
     showTime();
 
     if(seconds<=0){
       clearInterval(interval);
       interval=null;
-      $("timerStatus").textContent =
-        "Session complete! You earned 10 XP.";
-
-      earn(10);
+      state.focusSessions++;
+      $("timerStatus").textContent="Session complete! You earned 10 XP.";
       activateDay();
+      earn(10);
       save();
-      renderStats();
+      renderAll();
     }
   },1000);
 });
 
 $("pause").addEventListener("click",()=>{
-  if(interval!==null) clearInterval(interval);
+  if(interval!==null)clearInterval(interval);
   interval=null;
-  $("timerStatus").textContent = "Timer paused.";
+  $("timerStatus").textContent="Timer paused.";
 });
 
 $("reset").addEventListener("click",()=>{
-  if(interval!==null) clearInterval(interval);
+  if(interval!==null)clearInterval(interval);
   interval=null;
   seconds=1500;
   showTime();
-  $("timerStatus").textContent = "Timer reset. Ready when you are.";
+  $("timerStatus").textContent="Timer reset. Ready when you are.";
 });
 
 $("missionForm").addEventListener("submit",e=>{
   e.preventDefault();
-
-  const input = $("missionInput");
-  const text = input.value.trim();
-
-  if(!text) return;
+  const input=$("missionInput");
+  const text=input.value.trim();
+  if(!text)return;
 
   state.missions.push({
     id:state.nextId++,
     text,
-    done:false
+    done:false,
+    everCompleted:false
   });
 
   input.value="";
   save();
-  renderMissions();
-  renderStats();
+  renderAll();
 });
 
 $("saveProfile").addEventListener("click",()=>{
-  state.username = $("username").value.trim().slice(0,30);
+  state.username=$("username").value.trim().slice(0,30);
   save();
   renderProfile();
   renderStats();
-  $("profileStatus").textContent = "Profile saved successfully!";
+  $("profileStatus").textContent="Profile saved successfully!";
 });
 
-const quotes = [
+const quotes=[
   "One good choice can change the direction of your day.",
   "Progress beats perfection. Keep showing up.",
   "You can always begin again with your next decision.",
-  "Focus on the next small step.",
-  "Consistency grows from small actions repeated over time."
-];
-
-$("motivate").addEventListener("click",()=>{
-  $("motivation").textContent =
-    quotes[Math.floor(Math.random()*quotes.length)];
-});
-
-function showTutorial(){
-  $("tutorialTitle").textContent = steps[page][0];
-  $("tutorialText").textContent = steps[page][1];
-  $("nextTutorial").textContent =
-    page===steps.length-1 ? "Finish" : "Next";
-}
-
-function openTutorial(){
-  page=0;
-  showTutorial();
-
-  if(typeof $("tutorial").showModal==="function"){
-    $("tutorial").showModal();
-  }else{
-    alert(steps.map(s=>s[0]+"\n"+s[1]).join("\n\n"));
-  }
-}
-
-$("help").addEventListener("click",openTutorial);
-
-$("closeTutorial").addEventListener("click",()=>{
-  $("tutorial").close();
-  state.tutorialSeen=true;
-  save();
-});
-
-$("nextTutorial").addEventListener("click",()=>{
-  if(page<steps.length-1){
-    page++;
-    showTutorial();
-  }else{
-    $("tutorial").close();
-    state.tutorialSeen=true;
-    save();
-  }
-});
-
-$("restartChallenge").addEventListener("click",()=>{
-  if(!confirm("Start the 7-Day RESET Challenge again? Your previously earned XP will stay earned.")) return;
-
-  state.challengeDay=1;
-  state.challengeDone=[];
-  state.challengeFinished=false;
-  state.challengeAvailableDate="";
-  save();
-  renderChallenge();
-});
-
-resetDailyHabits();
-renderAll();
-showTime();
-
-if(!state.tutorialSeen){
-  setTimeout(openTutorial,300);
-}
-})();
-</script>
-</body>
-</html>
+  "Focus on the n

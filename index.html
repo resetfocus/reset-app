@@ -1,148 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#081b15">
-<title>RESET | Build Yourself</title>
-<style>
-:root{--bg:#081b15;--card:#102820;--inner:#19392c;--green:#7bf2a4;--white:#f2fff5;--muted:#b0c8b8;--border:#315441}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--white);font-family:system-ui,Arial,sans-serif}
-header{padding:20px;background:#0d241b;border-bottom:1px solid var(--border)}
-.wrap{max-width:920px;margin:auto}
-.brand{font-size:28px;font-weight:900;letter-spacing:2px;color:var(--green)}
-header p,.muted,.small{color:var(--muted)}
-main{max-width:920px;margin:auto;padding:14px;display:grid;gap:14px}
-.panel{padding:16px;background:var(--card);border:1px solid var(--border);border-radius:16px;min-width:0}
-h2{font-size:19px;margin:0 0 10px}
-h3{font-size:16px}
-p{line-height:1.5}
-.muted,.small{font-size:13px}
-button,input,select{font:inherit;border-radius:10px}
-button{padding:11px 14px;border:0;background:var(--green);color:#082016;font-weight:800;cursor:pointer}
-button.secondary{background:var(--inner);color:var(--white);border:1px solid var(--border)}
-button.danger{background:#512c2c;color:white}
-button:disabled{opacity:.5}
-input,select{min-width:0;width:100%;padding:12px;background:#091e16;color:var(--white);border:1px solid var(--border)}
-form{display:flex;gap:8px;margin:12px 0}
-form button{flex-shrink:0}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.stat{text-align:center;background:var(--inner);padding:12px 5px;border-radius:12px}
-.stat strong{display:block;font-size:23px;color:var(--green)}
-.stat span{font-size:12px;color:var(--muted)}
-.bar{height:9px;background:#294436;border-radius:10px;overflow:hidden;margin:10px 0}
-.bar div{height:100%;width:0;background:var(--green)}
-.item{display:flex;align-items:center;gap:9px;background:var(--inner);padding:10px;border-radius:10px;margin:8px 0}
-.item input[type=checkbox]{width:20px;height:20px;flex-shrink:0;accent-color:var(--green)}
-.item .words{flex:1;min-width:0;overflow-wrap:anywhere}
-.item .done{text-decoration:line-through;color:var(--muted)}
-.item button{padding:7px 10px;flex-shrink:0}
-.points{font-size:11px;color:var(--green);white-space:nowrap}
-.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
-.empty{font-size:13px;color:var(--muted);padding:8px}
-.timer{text-align:center;padding:10px}
-.clock{font-size:clamp(45px,12vw,68px);font-weight:900;color:var(--green);font-variant-numeric:tabular-nums}
-.timer button{margin:4px}
-.tag{font-size:12px;color:var(--green)}
-footer{text-align:center;padding:20px;color:var(--muted);font-size:12px}
-dialog{background:var(--card);color:var(--white);border:1px solid var(--border);border-radius:16px;width:min(92%,450px);padding:20px}
-dialog::backdrop{background:#000b}
-dialog input,dialog select{margin:6px 0 12px}
-#notice{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);max-width:90%;background:var(--green);color:#082016;padding:12px 16px;border-radius:12px;font-weight:800;display:none;z-index:20}
-@media(max-width:620px){.grid{grid-template-columns:1fr}main{padding:10px}.panel{padding:13px}.stats{gap:5px}.stat strong{font-size:20px}}
-</style>
-</head>
-<body>
-<header>
- <div class="wrap">
-  <div class="brand">RESET ↗</div>
-  <p class="muted">Small steps. Stronger you.</p>
-  <div class="actions">
-   <button class="secondary" id="profileButton" type="button">👤 Profile</button>
-   <button class="secondary" id="helpButton" type="button">❔ Help</button>
-  </div>
- </div>
-</header>
-
-<main>
- <section class="panel">
-  <p class="muted">YOUR JOURNEY</p>
-  <h2 id="welcome">Your next chapter starts today.</h2>
-  <div class="stats">
-   <div class="stat"><strong id="xp">0</strong><span>Total XP</span></div>
-   <div class="stat"><strong id="level">1</strong><span>Level</span></div>
-   <div class="stat"><strong id="streak">0</strong><span>Day streak 🔥</span></div>
-  </div>
-  <p class="small" id="levelLabel">0 / 100 XP to next level</p>
-  <div class="bar"><div id="levelBar"></div></div>
-  <p id="quote" class="muted">Small progress is still progress.</p>
- </section>
-
- <div class="grid">
-  <section class="panel">
-   <h2>🌱 Habit Garden</h2>
-   <p class="muted">Complete a habit for 5 XP. Progress resets daily, but earned XP stays.</p>
-   <form id="habitForm">
-    <input id="habitInput" maxlength="100" placeholder="Type a habit..." required>
-    <button type="submit">Add</button>
-   </form>
-   <div id="habits"></div>
-   <p id="habitSummary" class="small"></p>
-  </section>
-
-  <section class="panel">
-   <h2>🎯 Missions</h2>
-   <p class="muted">Complete a mission for 10 XP.</p>
-   <form id="missionForm">
-    <input id="missionInput" maxlength="120" placeholder="Type a mission..." required>
-    <button type="submit">Add</button>
-   </form>
-   <div id="missions"></div>
-  </section>
- </div>
-
- <section class="panel">
-  <h2>⏱️ Focus Timer</h2>
-  <p class="muted">Finish a focus session to earn 10 XP.</p>
-  <div class="timer">
-   <select id="minutes" aria-label="Timer duration">
-    <option value="5">5 minutes</option>
-    <option value="15">15 minutes</option>
-    <option value="25" selected>25 minutes</option>
-    <option value="45">45 minutes</option>
-   </select>
-   <div class="clock" id="clock">25:00</div>
-   <p id="timerMessage" class="muted">Ready when you are.</p>
-   <button type="button" id="startTimer">▶ Start</button>
-   <button type="button" id="pauseTimer" class="secondary">Ⅱ Pause</button>
-   <button type="button" id="resetTimer" class="secondary">↺ Reset</button>
-  </div>
- </section>
-
- <div class="grid">
-  <section class="panel">
-   <h2>📅 7-Day Challenge</h2>
-   <p class="muted">Log a day by completing a habit, mission, or focus session.</p>
-   <div id="challenge"></div>
-   <p id="challengeSummary" class="small"></p>
-  </section>
-  <section class="panel">
-   <h2>🏆 Achievements</h2>
-   <div id="achievements"></div>
-  </section>
- </div>
-
- <section class="panel">
-  <h2>💾 Save and Restore</h2>
-  <p class="muted">Progress is saved in this browser. It will not automatically sync between devices.</p>
-  <div class="actions">
-   <button type="button" id="exportButton">Export Backup</button>
-   <button type="button" class="secondary" id="importButton">Import Backup</button>
-   <button type="button" class="danger" id="clearButton">Reset All Data</button>
-  </div>
-  <input type="file" id="backupFile" accept=".json,application/json" hidden>
+"backupFile" accept=".json,application/json" hidden>
  </section>
 </main>
 <footer>RESET • Progress over perfection</footer>
@@ -165,7 +21,7 @@ dialog input,dialog select{margin:6px 0 12px}
 </dialog>
 
 <dialog id="helpDialog">
- <p class="muted" id="guideCount">RESET GUIDE • 1/6</p>
+ <p class="muted" id="guideCount">RESET GUIDE</p>
  <h2 id="guideTitle">Welcome to RESET!</h2>
  <p id="guideText"></p>
  <div class="actions">
@@ -178,381 +34,250 @@ dialog input,dialog select{margin:6px 0 12px}
 <script>
 (function(){
 "use strict";
-
-const $ = id => document.getElementById(id);
-const STORAGE_KEY = "resetV3";
-const dayKey = date => date.getFullYear()+"-"+String(date.getMonth()+1).padStart(2,"0")+"-"+String(date.getDate()).padStart(2,"0");
-const today = () => dayKey(new Date());
-const uid = () => Date.now().toString(36)+Math.random().toString(36).slice(2,8);
-
-const defaultHabits = [
- "Drink water","Read or learn something","Move or stretch",
- "Tidy my space","Limit unnecessary scrolling"
+const $=id=>document.getElementById(id);
+const KEY="resetV3";
+const today=()=>{const d=new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");};
+const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,8);
+const defaultHabits=["Drink water","Read or learn something","Move or stretch","Tidy my space","Limit unnecessary scrolling"];
+const guide=[
+["Welcome to RESET","Build better habits, complete missions, and make progress one day at a time."],
+["XP and levels","Habits give 5 XP. Missions and completed focus sessions give 10 XP. Every 100 XP advances a level."],
+["Habit Garden","Add habits and tick them when completed. Daily completions reset on a new day."],
+["Missions","Add your tasks and tick them off when completed."],
+["Focus Timer","Choose a duration, press Start, and finish the countdown to earn XP."],
+["Keep going","Track your streak, challenge, and achievements. Export a backup to protect your progress."]
 ];
+let data,seconds=1500,interval=null,running=false,guideIndex=0,noticeTimer=null;
 
-const guide = [
- ["Welcome to RESET","Build better habits, complete missions, and make progress one day at a time."],
- ["XP and levels","A completed habit gives 5 XP. A completed mission or focus session gives 10 XP. Every 100 XP advances a level."],
- ["Habit Garden","Add habits you want to practise. Tick each one when you finish it. Daily checkboxes reset on a new day."],
- ["Missions","Write down tasks you want to finish. Tick a mission when you complete it."],
- ["Focus Timer","Choose a duration, tap Start, and finish the countdown to earn 10 XP."],
- ["Keep going","Track your streak, challenge, and achievements. Use Export Backup to save a copy of your progress."]
-];
-
-let data;
-let seconds = 1500;
-let interval = null;
-let running = false;
-let guideIndex = 0;
-let noticeTimer = null;
-
-function fresh(){
- return {
-  username:"",
-  avatar:"🌱",
-  xp:0,
-  streak:0,
-  lastActive:"",
-  habits:defaultHabits.map(name=>({id:uid(),name,done:false,doneDate:""})),
-  missions:[],
-  challengeDays:[],
-  focusSessions:0,
-  achievements:[],
-  tutorialSeen:false
- };
+function fresh(){return {username:"",avatar:"🌱",xp:0,streak:0,lastActive:"",habits:defaultHabits.map(name=>({id:uid(),name,done:false,doneDate:""})),missions:[],challengeDays:[],focusSessions:0,achievements:[],tutorialSeen:false};}
+function save(){
+ try{localStorage.setItem(KEY,JSON.stringify(data));}
+ catch(e){notify("Could not save. Check browser storage settings.");}
 }
-
+function notify(message){
+ const n=$("notice");n.textContent=message;n.style.display="block";
+ clearTimeout(noticeTimer);noticeTimer=setTimeout(()=>n.style.display="none",2600);
+}
+function safe(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
 function load(){
  try{
-  const raw=localStorage.getItem(STORAGE_KEY);
-  data=raw ? {...fresh(),...JSON.parse(raw)} : fresh();
-  if(!Array.isArray(data.habits))data.habits=[];
-  if(!Array.isArray(data.missions))data.missions=[];
-  if(!Array.isArray(data.challengeDays))data.challengeDays=[];
-  if(!Array.isArray(data.achievements))data.achievements=[];
-  data.habits.forEach(h=>{if(!h.id)h.id=uid();});
+  const raw=localStorage.getItem(KEY);
+  data=raw?{...fresh(),...JSON.parse(raw)}:fresh();
+  ["habits","missions","challengeDays","achievements"].forEach(k=>{if(!Array.isArray(data[k]))data[k]=[];});
+  data.xp=Math.max(0,Number(data.xp)||0);
+  data.streak=Math.max(0,Number(data.streak)||0);
+  data.focusSessions=Math.max(0,Number(data.focusSessions)||0);
+  data.habits.forEach(h=>{if(!h.id)h.id=uid();if(h.doneDate!==today())h.done=false;});
   data.missions.forEach(m=>{if(!m.id)m.id=uid();});
-  data.habits.forEach(h=>{
-   if(h.doneDate!==today())h.done=false;
-  });
- }catch(error){
-  data=fresh();
-  notify("Saved data could not be read. A fresh profile was started.");
- }
- save();
+  data.habits.forEach(h=>{if(typeof h.done!=="boolean")h.done=false;});
+  data.missions.forEach(m=>{if(typeof m.done!=="boolean")m.done=false;});
+  save();
+ }catch(e){data=fresh();save();}
 }
-
-function save(){
- try{
-  localStorage.setItem(STORAGE_KEY,JSON.stringify(data));
- }catch(error){
-  notify("Saving failed. Check browser storage settings.");
- }
-}
-
-function safe(text){
- return String(text).replace(/[&<>"']/g,c=>({
-  "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
- }[c]));
-}
-
-function notify(message){
- const el=$("notice");
- el.textContent=message;
- el.style.display="block";
- clearTimeout(noticeTimer);
- noticeTimer=setTimeout(()=>el.style.display="none",2800);
-}
-
-function level(){return Math.floor(Math.max(0,data.xp)/100)+1;}
-
+function level(){return Math.floor(data.xp/100)+1;}
 function markActive(){
- const now=new Date();
- const current=today();
- if(data.lastActive!==current){
-  const previous=new Date(now);
-  previous.setDate(previous.getDate()-1);
-  data.streak=data.lastActive===dayKey(previous)?data.streak+1:1;
-  data.lastActive=current;
+ const t=today();
+ if(data.lastActive!==t){
+  const d=new Date();d.setDate(d.getDate()-1);
+  const yesterday=d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+  data.streak=data.lastActive===yesterday?data.streak+1:1;
+  data.lastActive=t;
  }
- if(!data.challengeDays.includes(current))data.challengeDays.push(current);
+ if(!data.challengeDays.includes(t))data.challengeDays.push(t);
 }
-
-function earn(amount){
- data.xp=Math.max(0,data.xp+amount);
- markActive();
- save();
- render();
-}
-
-function achievementChecks(){
+function award(n){data.xp=Math.max(0,data.xp+n);markActive();render();}
+function checkAchievements(){
  const completedHabits=data.habits.filter(h=>h.done).length;
  const completedMissions=data.missions.filter(m=>m.done).length;
- const checks=[
-  ["firstHabit","🌱 First Step","Complete a habit",completedHabits>0],
-  ["fiveHabits","🌿 Habit Builder","Complete five habits",completedHabits>=5],
-  ["firstMission","🎯 Mission Complete","Complete a mission",completedMissions>0],
-  ["hundredXP","💯 Century","Earn 100 XP",data.xp>=100],
-  ["levelThree","⚡ Level Three","Reach level 3",level()>=3],
-  ["firstFocus","⏱️ Focus Master","Finish a focus session",data.focusSessions>=1],
-  ["threeStreak","🔥 Consistency","Reach a 3-day streak",data.streak>=3],
-  ["sevenDays","🏆 Seven Days","Log activity on 7 days",data.challengeDays.length>=7]
+ const list=[
+ ["firstHabit","🌱 First Step","Complete a habit",completedHabits>0],
+ ["fiveHabits","🌿 Habit Builder","Complete five habits",completedHabits>=5],
+ ["firstMission","🎯 Mission Complete","Complete a mission",completedMissions>0],
+ ["hundredXP","💯 Century","Earn 100 XP",data.xp>=100],
+ ["levelThree","⚡ Level Three","Reach level 3",level()>=3],
+ ["firstFocus","⏱️ Focus Master","Finish a focus session",data.focusSessions>0],
+ ["threeStreak","🔥 Consistency","Reach a 3-day streak",data.streak>=3],
+ ["sevenDays","🏆 Seven Days","Log activity on 7 days",data.challengeDays.length>=7]
  ];
- checks.forEach(c=>{
-  if(c[3]&&!data.achievements.includes(c[0]))data.achievements.push(c[0]);
- });
- return checks;
+ list.forEach(a=>{if(a[3]&&!data.achievements.includes(a[0]))data.achievements.push(a[0]);});
+ return list;
 }
-
 function renderStats(){
- const xp=data.xp%100;
- $("xp").textContent=data.xp;
- $("level").textContent=level();
- $("streak").textContent=data.streak;
- $("levelLabel").textContent=xp+" / 100 XP to level "+(level()+1);
- $("levelBar").style.width=xp+"%";
- $("welcome").textContent=data.username ? "Welcome back, "+data.username+"!" : "Your next chapter starts today.";
+ const remaining=data.xp%100;
+ $("xp").textContent=data.xp;$("level").textContent=level();$("streak").textContent=data.streak;
+ $("levelLabel").textContent=remaining+" / 100 XP to level "+(level()+1);
+ $("levelBar").style.width=remaining+"%";
+ $("welcome").textContent=data.username?"Welcome back, "+data.username+"!":"Your next chapter starts today.";
  $("profileButton").textContent=data.avatar+" "+(data.username||"Profile");
- const quotes=[
-  "Small progress is still progress.",
-  "Build a routine you can repeat.",
-  "One good decision at a time.",
-  "Consistency matters more than perfection.",
-  "Start small. Keep going."
- ];
+ const quotes=["Small progress is still progress.","Build a routine you can repeat.","One good decision at a time.","Consistency matters more than perfection.","Start small. Keep going."];
  $("quote").textContent=quotes[new Date().getDate()%quotes.length];
 }
-
-function renderHabits(){
- const box=$("habits");
- box.innerHTML="";
- if(!data.habits.length)box.innerHTML='<p class="empty">No habits yet. Add one above.</p>';
- data.habits.forEach(h=>{
-  const row=document.createElement("div");
-  row.className="item";
-  row.innerHTML='<input type="checkbox" data-kind="habit" data-id="'+safe(h.id)+'" aria-label="Complete habit" '+(h.done?"checked":"")+'><span class="words '+(h.done?"done":"")+'">'+safe(h.name)+'</span><span class="points">+5 XP</span><button type="button" class="secondary" data-delete="habit" data-id="'+safe(h.id)+'" aria-label="Delete habit">✕</button>';
-  box.appendChild(row);
- });
- $("habitSummary").textContent=data.habits.filter(h=>h.done).length+" of "+data.habits.length+" habits completed today";
-}
-
-function renderMissions(){
- const box=$("missions");
- box.innerHTML="";
- if(!data.missions.length)box.innerHTML='<p class="empty">No missions yet. Add one above.</p>';
- data.missions.forEach(m=>{
-  const row=document.createElement("div");
-  row.className="item";
-  row.innerHTML='<input type="checkbox" data-kind="mission" data-id="'+safe(m.id)+'" aria-label="Complete mission" '+(m.done?"checked":"")+'><span class="words '+(m.done?"done":"")+'">'+safe(m.name)+'</span><span class="points">+10 XP</span><button type="button" class="secondary" data-delete="mission" data-id="'+safe(m.id)+'" aria-label="Delete mission">✕</button>';
+function renderList(container,list,kind){
+ const box=$(container);box.innerHTML="";
+ if(!list.length){box.innerHTML='<p class="empty">Nothing here yet. Add one above.</p>';return;}
+ list.forEach(item=>{
+  const row=document.createElement("div");row.className="item";
+  const points=kind==="habit"?5:10;
+  row.innerHTML='<input type="checkbox" data-kind="'+kind+'" data-id="'+safe(item.id)+'" aria-label="Complete item" '+(item.done?"checked":"")+'><span class="words '+(item.done?"done":"")+'">'+safe(item.name)+'</span><span class="points">+'+points+' XP</span><button type="button" class="secondary" data-delete="'+kind+'" data-id="'+safe(item.id)+'" aria-label="Delete item">✕</button>';
   box.appendChild(row);
  });
 }
-
 function renderChallenge(){
- const box=$("challenge");
- box.innerHTML="";
- const now=new Date();
- const monday=new Date(now);
- monday.setHours(12,0,0,0);
- monday.setDate(now.getDate()-(now.getDay()+6)%7);
+ const box=$("challenge");box.innerHTML="";
+ const now=new Date(),monday=new Date(now);monday.setHours(12,0,0,0);monday.setDate(now.getDate()-(now.getDay()+6)%7);
  let count=0;
- for(let i=0;i<7;i++){
-  const d=new Date(monday);
-  d.setDate(monday.getDate()+i);
-  const key=dayKey(d);
-  const done=data.challengeDays.includes(key);
-  if(done)count++;
-  const row=document.createElement("div");
-  row.className="item";
-  row.innerHTML="<span>"+(done?"✅":"⬜")+"</span><span class=\"words\">"+["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"][i]+"</span><span class=\"points\">"+(done?"Done":"Pending")+"</span>";
-  box.appendChild(row);
- }
+ ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"].forEach((name,i)=>{
+  const d=new Date(monday);d.setDate(monday.getDate()+i);
+  const key=d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+  const done=data.challengeDays.includes(key);if(done)count++;
+  const row=document.createElement("div");row.className="item";
+  row.innerHTML="<span>"+(done?"✅":"⬜")+"</span><span class=\"words\">"+name+"</span><span class=\"points\">"+(done?"Done":"Pending")+"</span>";box.appendChild(row);
+ });
  $("challengeSummary").textContent=count+" / 7 active days this week";
 }
-
 function renderAchievements(){
- const box=$("achievements");
- box.innerHTML="";
- achievementChecks().forEach(c=>{
-  const unlocked=data.achievements.includes(c[0]);
-  const row=document.createElement("div");
-  row.className="item";
-  row.innerHTML='<span>'+(unlocked?"🏅":"🔒")+'</span><span class="words"><strong>'+safe(c[1])+'</strong><br><span class="small">'+safe(c[2])+'</span></span><span class="points">'+(unlocked?"Unlocked":"Locked")+'</span>';
+ const box=$("achievements");box.innerHTML="";
+ checkAchievements().forEach(a=>{
+  const unlocked=data.achievements.includes(a[0]),row=document.createElement("div");row.className="item";
+  row.innerHTML='<span>'+(unlocked?"🏅":"🔒")+'</span><span class="words"><strong>'+safe(a[1])+'</strong><br><span class="small">'+safe(a[2])+'</span></span><span class="points">'+(unlocked?"Unlocked":"Locked")+'</span>';
   box.appendChild(row);
  });
 }
-
 function render(){
  renderStats();
- renderHabits();
- renderMissions();
- renderChallenge();
- renderAchievements();
- save();
+ renderList("habits",data.habits,"habit");
+ renderList("missions",data.missions,"mission");
+ $("habitSummary").textContent=data.habits.filter(h=>h.done).length+" of "+data.habits.length+" habits completed today";
+ renderChallenge();renderAchievements();save();
 }
+function addItem(formId,inputId,kind){
+ $(formId).addEventListener("submit",e=>{
+  e.preventDefault();const input=$(inputId),name=input.value.trim();
+  if(!name){notify("Please type something first.");input.focus();return;}
+  const item={id:uid(),name,done:false};
+  if(kind==="habit"){item.doneDate="";data.habits.push(item);}else data.missions.push(item);
+  input.value="";render();notify(kind==="habit"?"Habit added! 🌱":"Mission added! 🎯");input.focus();
+ });
+}
+addItem("habitForm","habitInput","habit");
+addItem("missionForm","missionInput","mission");
 
-// Forms: both the Add button and Enter key trigger these handlers.
-$("habitForm").addEventListener("submit",function(e){
- e.preventDefault();
- const input=$("habitInput");
- const name=input.value.trim();
- if(!name){notify("Please type a habit first.");input.focus();return;}
- data.habits.push({id:uid(),name,done:false,doneDate:""});
- input.value="";
- render();
- notify("Habit added successfully! 🌱");
- input.focus();
-});
-
-$("missionForm").addEventListener("submit",function(e){
- e.preventDefault();
- const input=$("missionInput");
- const name=input.value.trim();
- if(!name){notify("Please type a mission first.");input.focus();return;}
- data.missions.push({id:uid(),name,done:false});
- input.value="";
- render();
- notify("Mission added successfully! 🎯");
- input.focus();
-});
-
-// Handle checkboxes and delete buttons even after the lists rerender.
-document.addEventListener("change",function(e){
- const el=e.target;
- if(!el.matches("input[data-kind]"))return;
- const isHabit=el.dataset.kind==="habit";
- const list=isHabit?data.habits:data.missions;
- const item=list.find(x=>x.id===el.dataset.id);
- if(!item)return;
- if(el.checked===item.done)return;
+document.addEventListener("change",e=>{
+ const el=e.target;if(!el.matches("input[data-kind]"))return;
+ const habit=el.dataset.kind==="habit",list=habit?data.habits:data.missions,item=list.find(x=>x.id===el.dataset.id);
+ if(!item||item.done===el.checked)return;
  item.done=el.checked;
- if(isHabit){
-  item.doneDate=el.checked?today():"";
- }
- data.xp=Math.max(0,data.xp+(el.checked?(isHabit?5:10):-(isHabit?5:10)));
- if(el.checked){
-  markActive();
-  notify(isHabit?"+5 XP! 🌱":"+10 XP! 🎯");
- }else{
-  notify("Completion undone.");
- }
+ if(habit)item.doneDate=el.checked?today():"";
+ if(el.checked){data.xp+=habit?5:10;markActive();notify(habit?"+5 XP! 🌱":"+10 XP! 🎯");}
+ else{data.xp=Math.max(0,data.xp-(habit?5:10));notify("Completion undone.");}
  render();
 });
-
-document.addEventListener("click",function(e){
- const btn=e.target.closest("button[data-delete]");
- if(!btn)return;
- const id=btn.dataset.id;
- if(btn.dataset.delete==="habit"){
-  data.habits=data.habits.filter(x=>x.id!==id);
-  notify("Habit deleted.");
- }else{
-  data.missions=data.missions.filter(x=>x.id!==id);
-  notify("Mission deleted.");
- }
- render();
+document.addEventListener("click",e=>{
+ const btn=e.target.closest("button[data-delete]");if(!btn)return;
+ if(!confirm("Delete this item?"))return;
+ const habit=btn.dataset.delete==="habit";
+ if(habit)data.habits=data.habits.filter(x=>x.id!==btn.dataset.id);
+ else data.missions=data.missions.filter(x=>x.id!==btn.dataset.id);
+ render();notify("Item deleted.");
 });
 
 // Profile
 $("profileButton").addEventListener("click",()=>{
- $("username").value=data.username;
- $("avatar").value=data.avatar;
+ $("username").value=data.username;$("avatar").value=data.avatar;
  $("profileDialog").showModal();
 });
 $("closeProfile").addEventListener("click",()=>$("profileDialog").close());
 $("saveProfile").addEventListener("click",()=>{
- data.username=$("username").value.trim().slice(0,30);
- data.avatar=$("avatar").value;
- save();render();$("profileDialog").close();
- notify("Profile saved!");
+ data.username=$("username").value.trim().slice(0,30);data.avatar=$("avatar").value;
+ render();$("profileDialog").close();notify("Profile saved!");
 });
 
-// Focus timer
-function stop(){
- if(interval!==null)clearInterval(interval);
- interval=null;
- running=false;
-}
-function paint(){
- $("clock").textContent=String(Math.floor(seconds/60)).padStart(2,"0")+":"+String(seconds%60).padStart(2,"0");
-}
+// Timer: uses timestamps to reduce timing drift.
+function stopTimer(){if(interval!==null)clearInterval(interval);interval=null;running=false;}
+function paintClock(){seconds=Math.max(0,seconds);$("clock").textContent=String(Math.floor(seconds/60)).padStart(2,"0")+":"+String(seconds%60).padStart(2,"0");}
 function resetTimer(){
- stop();
- seconds=Number($("minutes").value)*60;
- paint();
- $("timerMessage").textContent="Ready when you are.";
- $("startTimer").disabled=false;
+ stopTimer();seconds=Number($("minutes").value)*60;paintClock();
+ $("timerMessage").textContent="Ready when you are.";$("startTimer").disabled=false;
+}
+function finishTimer(){
+ stopTimer();seconds=0;paintClock();$("startTimer").disabled=false;
+ $("timerMessage").textContent="Session complete. Great work!";
+ data.focusSessions++;data.xp+=10;markActive();render();notify("Focus session complete! +10 XP 🎉");
+ if(navigator.vibrate)navigator.vibrate(150);
 }
 $("minutes").addEventListener("change",resetTimer);
 $("startTimer").addEventListener("click",()=>{
  if(running)return;
  if(seconds<=0)resetTimer();
- running=true;
- $("startTimer").disabled=true;
+ running=true;$("startTimer").disabled=true;
  $("timerMessage").textContent="Focus on one thing at a time.";
+ const end=Date.now()+seconds*1000;
  interval=setInterval(()=>{
-  seconds--;
-  paint();
-  if(seconds<=0){
-   stop();
-   seconds=0;
-   paint();
-   $("startTimer").disabled=false;
-   $("timerMessage").textContent="Session complete. Great work!";
-   data.focusSessions++;
-   data.xp+=10;
-   markActive();
-   render();
-   notify("Focus session complete! +10 XP 🎉");
-   if(navigator.vibrate)navigator.vibrate(150);
-  }
- },1000);
+  seconds=Math.ceil((end-Date.now())/1000);paintClock();
+  if(seconds<=0)finishTimer();
+ },250);
 });
 $("pauseTimer").addEventListener("click",()=>{
- if(running){
-  stop();
-  $("startTimer").disabled=false;
-  $("timerMessage").textContent="Paused. Tap Start to resume.";
- }else{
-  notify("Timer is already paused.");
- }
+ if(!running){notify("Timer is already paused.");return;}
+ seconds=Math.max(0,seconds);stopTimer();paintClock();$("startTimer").disabled=false;
+ $("timerMessage").textContent="Paused. Tap Start to resume.";
 });
 $("resetTimer").addEventListener("click",resetTimer);
 
-// Tutorial / Help
-function showGuide(){
- guideIndex=0;
- paintGuide();
- $("helpDialog").showModal();
-}
+// Tutorial
 function paintGuide(){
  const g=guide[guideIndex];
  $("guideCount").textContent="RESET GUIDE • "+(guideIndex+1)+"/"+guide.length;
- $("guideTitle").textContent=g[0];
- $("guideText").textContent=g[1];
+ $("guideTitle").textContent=g[0];$("guideText").textContent=g[1];
  $("guideBack").disabled=guideIndex===0;
  $("guideNext").textContent=guideIndex===guide.length-1?"Finish":"Next";
 }
-function finishGuide(){
- data.tutorialSeen=true;
- save();
- $("helpDialog").close();
-}
+function showGuide(){guideIndex=0;paintGuide();$("helpDialog").showModal();}
+function finishGuide(){data.tutorialSeen=true;save();$("helpDialog").close();}
 $("helpButton").addEventListener("click",showGuide);
-$("guideBack").addEventListener("click",()=>{
- if(guideIndex>0){guideIndex--;paintGuide();}
-});
-$("guideNext").addEventListener("click",()=>{
- if(guideIndex<guide.length-1){guideIndex++;paintGuide();}
- else finishGuide();
-});
+$("guideBack").addEventListener("click",()=>{if(guideIndex>0){guideIndex--;paintGuide();}});
+$("guideNext").addEventListener("click",()=>{if(guideIndex<guide.length-1){guideIndex++;paintGuide();}else finishGuide();});
 $("guideFinish").addEventListener("click",finishGuide);
 
-// Backup
+// Export and import backups
 $("exportButton").addEventListener("click",()=>{
  try{
   const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
-  const url=URL.createObjectURL(blob);
-  const a=document.createElement("a");
-  a.href=url;
-  a.d
+  const url=URL.createObjectURL(blob),a=document.createElement("a");
+  a.href=url;a.download="RESET-backup-"+today()+".json";
+  document.body.appendChild(a);a.click();a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),1000);
+  notify("Backup exported!");
+ }catch(e){notify("Export failed. Please try again.");}
+});
+$("importButton").addEventListener("click",()=>$("backupFile").click());
+$("backupFile").addEventListener("change",async e=>{
+ const file=e.target.files[0];if(!file)return;
+ try{
+  const imported=JSON.parse(await file.text());
+  if(!imported||typeof imported!=="object"||!Array.isArray(imported.habits)||!Array.isArray(imported.missions)||!Number.isFinite(Number(imported.xp))||Number(imported.xp)<0)throw Error("Invalid backup");
+  if(!confirm("Import this backup? Your current progress will be replaced."))return;
+  const base=fresh();
+  data={...base,...imported};
+  ["habits","missions","challengeDays","achievements"].forEach(k=>{if(!Array.isArray(data[k]))data[k]=[];});
+  data.habits.forEach(h=>{if(!h.id)h.id=uid();if(h.doneDate!==today())h.done=false;});
+  data.missions.forEach(m=>{if(!m.id)m.id=uid();});
+  data.xp=Math.max(0,Number(data.xp)||0);
+  render();resetTimer();notify("Backup imported successfully!");
+ }catch(err){notify("That backup file is invalid.");}
+ finally{e.target.value="";}
+});
+
+// Clear all progress only after confirmation
+$("clearButton").addEventListener("click",()=>{
+ if(!confirm("Reset ALL RESET data? This cannot be undone unless you have a backup."))return;
+ stopTimer();data=fresh();render();resetTimer();notify("All data has been reset.");
+});
+
+// Start app
+load();render();resetTimer();
+if(!data.tutorialSeen){showGuide();}
+})();
+</script>
+</body>
+</html>

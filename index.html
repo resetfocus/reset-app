@@ -2,696 +2,577 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#081b15">
-<title>RESET | Build Yourself</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0a1020">
+<title>RESET — Reclaim Your Focus</title>
+
 <style>
 :root {
-  --bg:#081b15;
-  --card:#102820;
-  --inner:#19392c;
-  --green:#7bf2a4;
-  --white:#f2fff5;
-  --muted:#b0c8b8;
-  --border:#315441;
+  --bg: #0a1020;
+  --card: #151f33;
+  --card2: #1c2941;
+  --green: #77f2a5;
+  --text: #f4f7ff;
+  --muted: #aab6cc;
+  --red: #ff7777;
+  --border: #2b3a55;
 }
-*{box-sizing:border-box}
+* { box-sizing: border-box; }
 body {
-  margin:0;background:var(--bg);color:var(--white);
-  font-family:system-ui,Arial,sans-serif
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, Arial, sans-serif;
+  line-height: 1.5;
 }
-header{padding:20px;background:#0d241b;border-bottom:1px solid var(--border)}
-.wrap,main{max-width:920px;margin:auto}
-.brand{font-size:28px;font-weight:900;letter-spacing:2px;color:var(--green)}
-header p,.muted,.small{color:var(--muted)}
-main{padding:14px;display:grid;gap:14px}
-.panel{padding:16px;background:var(--card);border:1px solid var(--border);border-radius:16px;min-width:0}
-h2{font-size:19px;margin:0 0 10px}
-p{line-height:1.5}
-.muted,.small{font-size:13px}
-button,input,select{font:inherit;border-radius:10px}
-button{padding:11px 14px;border:0;background:var(--green);color:#082016;font-weight:800;cursor:pointer}
-button.secondary{background:var(--inner);color:var(--white);border:1px solid var(--border)}
-button.danger{background:#512c2c;color:white}
-button:disabled{opacity:.5;cursor:not-allowed}
-input,select{min-width:0;width:100%;padding:12px;background:#091e16;color:var(--white);border:1px solid var(--border)}
-form{display:flex;gap:8px;margin:12px 0}
-form button{flex-shrink:0}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.stat{text-align:center;background:var(--inner);padding:12px 5px;border-radius:12px}
-.stat strong{display:block;font-size:23px;color:var(--green)}
-.stat span{font-size:12px;color:var(--muted)}
-.bar{height:9px;background:#294436;border-radius:10px;overflow:hidden;margin:10px 0}
-.bar div{height:100%;width:0;background:var(--green);transition:width .2s}
-.item{display:flex;align-items:center;gap:9px;background:var(--inner);padding:10px;border-radius:10px;margin:8px 0;min-width:0}
-.item input[type=checkbox]{width:20px;height:20px;flex-shrink:0;accent-color:var(--green)}
-.words{flex:1;min-width:0;overflow-wrap:anywhere}
-.done{text-decoration:line-through;color:var(--muted)}
-.item button{padding:7px 10px;flex-shrink:0}
-.points{font-size:11px;color:var(--green);white-space:nowrap}
-.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
-.empty{font-size:13px;color:var(--muted);padding:8px}
-.timer{text-align:center;padding:10px}
-.clock{font-size:clamp(45px,12vw,68px);font-weight:900;color:var(--green);font-variant-numeric:tabular-nums}
-.timer button{margin:4px}
-footer{text-align:center;padding:20px;color:var(--muted);font-size:12px}
-dialog{background:var(--card);color:var(--white);border:1px solid var(--border);border-radius:16px;width:min(92%,450px);padding:20px;max-height:85vh;overflow:auto}
-dialog::backdrop{background:#000b}
-dialog input,dialog select{margin:6px 0 12px}
-#notice{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);max-width:90%;background:var(--green);color:#082016;padding:12px 16px;border-radius:12px;font-weight:800;display:none;z-index:20}
-@media(max-width:620px){
- .grid{grid-template-columns:1fr}
- main{padding:10px}
- .panel{padding:13px}
- .stats{gap:5px}
- .stat strong{font-size:20px}
+header {
+  padding: 20px 16px;
+  border-bottom: 1px solid var(--border);
+  background: #0d1528;
+}
+.top {
+  max-width: 1000px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.brand { font-size: 25px; font-weight: 900; color: var(--green); }
+.small { color: var(--muted); font-size: 13px; }
+.profile { display: flex; align-items: center; gap: 10px; }
+.avatar {
+  width: 44px; height: 44px; border-radius: 50%;
+  display: grid; place-items: center; background: var(--card2);
+  font-size: 25px; border: 1px solid var(--border);
+}
+main { max-width: 1000px; padding: 18px 14px 50px; margin: auto; }
+h1 { font-size: 26px; margin: 5px 0; }
+h2 { font-size: 19px; margin: 0 0 12px; }
+p { margin: 6px 0 12px; }
+.grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 16px; padding: 16px; min-width: 0;
+}
+.full { grid-column: 1 / -1; }
+.stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; margin-top: 14px; }
+.stat { background: var(--card2); padding: 12px 8px; border-radius: 12px; text-align: center; }
+.stat strong { display: block; font-size: 22px; color: var(--green); }
+.stat span { font-size: 12px; color: var(--muted); }
+form { display: flex; gap: 8px; margin: 10px 0 14px; }
+input, select {
+  min-width: 0; width: 100%; background: #0c1425; color: var(--text);
+  border: 1px solid var(--border); border-radius: 10px;
+  padding: 12px; font: inherit;
+}
+button {
+  border: 0; border-radius: 10px; padding: 11px 14px;
+  font: inherit; font-weight: 700; cursor: pointer;
+  background: var(--green); color: #08131a;
+}
+button:active { transform: scale(.98); }
+button.secondary { background: var(--card2); color: var(--text); border: 1px solid var(--border); }
+button.danger { background: #48232c; color: #ffdce0; }
+button:disabled { opacity: .5; cursor: not-allowed; }
+.item {
+  display: flex; align-items: center; gap: 9px;
+  padding: 11px 0; border-top: 1px solid var(--border);
+}
+.item:first-child { border-top: 0; }
+.item-name { flex: 1; overflow-wrap: anywhere; }
+.item-name.done { text-decoration: line-through; color: var(--muted); }
+.item button { padding: 7px 9px; font-size: 13px; }
+.check {
+  width: 22px; height: 22px; accent-color: var(--green); flex-shrink: 0;
+}
+.progress { height: 10px; background: #0a1222; border-radius: 20px; overflow: hidden; margin: 10px 0; }
+.progress div { height: 100%; width: 0; background: var(--green); transition: width .2s; }
+.timer { font-size: clamp(38px, 10vw, 58px); font-weight: 900; text-align: center; margin: 8px 0; letter-spacing: 2px; }
+.timer-controls { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+.center { text-align: center; }
+.tag { display: inline-block; background: var(--card2); border: 1px solid var(--border); padding: 5px 10px; border-radius: 20px; font-size: 12px; }
+footer { color: var(--muted); text-align: center; padding: 20px; font-size: 12px; }
+#toast {
+  position: fixed; left: 50%; bottom: 20px; transform: translateX(-50%);
+  background: var(--green); color: #08131a; padding: 12px 18px;
+  border-radius: 12px; font-weight: 700; z-index: 20;
+  display: none; max-width: 90%; text-align: center;
+}
+dialog {
+  background: var(--card); color: var(--text); border: 1px solid var(--border);
+  border-radius: 16px; padding: 22px; width: min(440px, 92%);
+}
+dialog::backdrop { background: #000b; }
+.dialog-actions { display: flex; gap: 8px; justify-content: flex-end; flex-wrap: wrap; }
+@media(max-width:650px) {
+  .grid { grid-template-columns: 1fr; }
+  .full { grid-column: auto; }
+  .stats { grid-template-columns: repeat(3,1fr); }
+  .card { padding: 14px; }
+  form button { padding: 10px 12px; }
 }
 </style>
 </head>
-<body>
 
+<body>
 <header>
- <div class="wrap">
-  <div class="brand">RESET ↗</div>
-  <p class="muted">Small steps. Stronger you.</p>
-  <div class="actions">
-   <button class="secondary" id="profileButton" type="button">👤 Profile</button>
-   <button class="secondary" id="helpButton" type="button">❔ Help</button>
+  <div class="top">
+    <div>
+      <div class="brand">RESET<span style="color:white">.</span></div>
+      <div class="small">Reclaim Your Focus</div>
+    </div>
+    <div class="profile">
+      <div class="avatar" id="avatarDisplay">🌱</div>
+      <div>
+        <strong id="usernameDisplay">Your Profile</strong><br>
+        <button class="secondary" id="editProfileBtn" type="button">Edit profile</button>
+      </div>
+    </div>
   </div>
- </div>
 </header>
 
 <main>
- <section class="panel">
-  <p class="muted">YOUR JOURNEY</p>
-  <h2 id="welcome">Your next chapter starts today.</h2>
-  <div class="stats">
-   <div class="stat"><strong id="xp">0</strong><span>Total XP</span></div>
-   <div class="stat"><strong id="level">1</strong><span>Level</span></div>
-   <div class="stat"><strong id="streak">0</strong><span>Day streak 🔥</span></div>
-  </div>
-  <p class="small" id="levelLabel">0 / 100 XP to next level</p>
-  <div class="bar"><div id="levelBar"></div></div>
-  <p id="quote" class="muted">Small progress is still progress.</p>
- </section>
-
- <div class="grid">
-  <section class="panel">
-   <h2>🌱 Habit Garden</h2>
-   <p class="muted">Complete a habit for 5 XP. Habits reset daily; earned XP stays.</p>
-   <form id="habitForm">
-    <input id="habitInput" maxlength="100" placeholder="Type a habit..." required>
-    <button type="submit">Add</button>
-   </form>
-   <div id="habits"></div>
-   <p id="habitSummary" class="small"></p>
+  <section style="margin-bottom:18px">
+    <h1>Small steps. Real progress.</h1>
+    <p class="small">Build better habits, finish your missions and take back your focus.</p>
+    <button class="secondary" id="helpBtn" type="button">❔ Help / Tutorial</button>
   </section>
 
-  <section class="panel">
-   <h2>🎯 Missions</h2>
-   <p class="muted">Complete a mission for 10 XP.</p>
-   <form id="missionForm">
-    <input id="missionInput" maxlength="120" placeholder="Type a mission..." required>
-    <button type="submit">Add</button>
-   </form>
-   <div id="missions"></div>
-  </section>
- </div>
+  <section class="grid">
+    <div class="card">
+      <h2>⚡ Your Progress</h2>
+      <div class="stats">
+        <div class="stat"><strong id="xpDisplay">0</strong><span>Total XP</span></div>
+        <div class="stat"><strong id="levelDisplay">1</strong><span>Level</span></div>
+        <div class="stat"><strong id="streakDisplay">0</strong><span>Day streak</span></div>
+      </div>
+      <p class="small" id="levelText">0 / 100 XP to next level</p>
+      <div class="progress"><div id="xpBar"></div></div>
+      <p class="small" id="achievementText">🏅 Your journey starts today.</p>
+    </div>
 
- <section class="panel">
-  <h2>⏱️ Focus Timer</h2>
-  <p class="muted">Finish a focus session to earn 10 XP.</p>
-  <div class="timer">
-   <select id="minutes" aria-label="Timer duration">
-    <option value="5">5 minutes</option>
-    <option value="15">15 minutes</option>
-    <option value="25" selected>25 minutes</option>
-    <option value="45">45 minutes</option>
-   </select>
-   <div class="clock" id="clock">25:00</div>
-   <p id="timerMessage" class="muted">Ready when you are.</p>
-   <button type="button" id="startTimer">▶ Start</button>
-   <button type="button" id="pauseTimer" class="secondary">Ⅱ Pause</button>
-   <button type="button" id="resetTimer" class="secondary">↺ Reset</button>
-  </div>
- </section>
+    <div class="card">
+      <h2>⏱️ Focus Timer</h2>
+      <p class="small">Choose a session, then press Start.</p>
+      <select id="durationSelect" aria-label="Focus duration">
+        <option value="300">5 minutes</option>
+        <option value="900">15 minutes</option>
+        <option value="1500" selected>25 minutes</option>
+        <option value="3000">50 minutes</option>
+      </select>
+      <div class="timer" id="timerDisplay">25:00</div>
+      <div class="timer-controls">
+        <button type="button" id="startTimerBtn">▶ Start</button>
+        <button type="button" class="secondary" id="pauseTimerBtn">Ⅱ Pause</button>
+        <button type="button" class="secondary" id="resetTimerBtn">↻ Reset</button>
+      </div>
+      <p class="small center" id="timerStatus">Ready when you are.</p>
+    </div>
 
- <div class="grid">
-  <section class="panel">
-   <h2>📅 7-Day Challenge</h2>
-   <p class="muted">Complete a habit, mission, or focus session to log an active day.</p>
-   <div id="challenge"></div>
-   <p id="challengeSummary" class="small"></p>
-  </section>
-  <section class="panel">
-   <h2>🏆 Achievements</h2>
-   <div id="achievements"></div>
-  </section>
- </div>
+    <div class="card">
+      <h2>🌱 Habit Garden</h2>
+      <p class="small">Complete habits to earn 5 XP each per day.</p>
+      <form id="habitForm">
+        <input id="habitInput" placeholder="Add your own habit..." maxlength="100" autocomplete="off" required>
+        <button type="submit">Add</button>
+      </form>
+      <div id="habitList"></div>
+      <p class="small" id="habitCount">0 completed today</p>
+    </div>
 
- <section class="panel">
-  <h2>💾 Your Progress</h2>
-  <p class="muted">RESET automatically saves your progress in this browser. Browser storage can be lost if you clear site data or switch browsers.</p>
-  <button type="button" class="danger" id="clearButton">Reset All Data</button>
- </section>
+    <div class="card">
+      <h2>🎯 Daily Missions</h2>
+      <p class="small">Add tasks you want to finish today.</p>
+      <form id="missionForm">
+        <input id="missionInput" placeholder="Add your own mission..." maxlength="120" autocomplete="off" required>
+        <button type="submit">Add</button>
+      </form>
+      <div id="missionList"></div>
+      <p class="small" id="missionCount">0 missions completed</p>
+    </div>
+
+    <div class="card full">
+      <h2>🔥 7-Day Challenge</h2>
+      <p>Complete at least one habit every day to build consistency.</p>
+      <div class="progress"><div id="challengeBar"></div></div>
+      <p class="small" id="challengeText">Your challenge begins when you complete a habit.</p>
+    </div>
+
+    <div class="card full">
+      <h2>🏆 Achievements</h2>
+      <div id="achievementList" class="small">Complete habits and missions to unlock achievements.</div>
+    </div>
+
+    <div class="card full">
+      <h2>⚙️ Settings</h2>
+      <p class="small">Your progress is saved on this device and browser.</p>
+      <button type="button" class="danger" id="resetAllBtn">Reset all data</button>
+    </div>
+  </section>
 </main>
 
-<footer>RESET • Progress over perfection</footer>
-<div id="notice" role="status" aria-live="polite"></div>
+<footer>RESET • Focus on progress, not perfection.</footer>
+<div id="toast" role="status" aria-live="polite"></div>
 
 <dialog id="profileDialog">
- <h2>👤 Your Profile</h2>
- <label for="username">Username</label>
- <input id="username" maxlength="30" placeholder="Choose a username">
- <label for="avatar">Avatar</label>
- <select id="avatar">
-  <option>🌱</option><option>🔥</option><option>⚡</option>
-  <option>🦁</option><option>🐺</option><option>🚀</option>
-  <option>🎯</option><option>👑</option><option>💎</option>
- </select>
- <div class="actions">
-  <button id="saveProfile" type="button">Save</button>
-  <button id="closeProfile" class="secondary" type="button">Close</button>
- </div>
+  <h2>Edit your profile</h2>
+  <label for="profileName">Username</label>
+  <input id="profileName" maxlength="24" placeholder="Enter a username">
+  <p>Choose an avatar</p>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 18px">
+    <button type="button" class="secondary avatarChoice" data-avatar="🌱">🌱</button>
+    <button type="button" class="secondary avatarChoice" data-avatar="🚀">🚀</button>
+    <button type="button" class="secondary avatarChoice" data-avatar="🐼">🐼</button>
+    <button type="button" class="secondary avatarChoice" data-avatar="🦁">🦁</button>
+    <button type="button" class="secondary avatarChoice" data-avatar="⚡">⚡</button>
+    <button type="button" class="secondary avatarChoice" data-avatar="🎯">🎯</button>
+  </div>
+  <div class="dialog-actions">
+    <button type="button" class="secondary" id="cancelProfileBtn">Cancel</button>
+    <button type="button" id="saveProfileBtn">Save profile</button>
+  </div>
 </dialog>
 
-<dialog id="helpDialog">
- <p class="muted" id="guideCount">RESET GUIDE</p>
- <h2 id="guideTitle">Welcome to RESET!</h2>
- <p id="guideText"></p>
- <div class="actions">
-  <button id="guideBack" class="secondary" type="button">Back</button>
-  <button id="guideNext" type="button">Next</button>
-  <button id="guideFinish" class="secondary" type="button">Finish</button>
- </div>
+<dialog id="guideDialog">
+  <h2>👋 Welcome to RESET!</h2>
+  <p>1. Add daily habits such as reading or tidying your desk.</p>
+  <p>2. Add missions for the tasks you need to finish.</p>
+  <p>3. Tap the checkbox when you complete a habit or mission.</p>
+  <p>4. Use the focus timer to work without distractions.</p>
+  <p>5. Earn XP and build your streak by staying consistent.</p>
+  <p class="small">Your data is saved in this browser on this device. Clearing browser data may erase it.</p>
+  <div class="dialog-actions">
+    <button type="button" id="closeGuideBtn">Let's go!</button>
+  </div>
 </dialog>
 
 <script>
-(function(){
-"use strict";
+(() => {
+  "use strict";
 
-const $ = id => document.getElementById(id);
-const STORAGE_KEY = "resetV3";
-const today = () => {
- const d = new Date();
- return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
-};
-const uid = () => Date.now().toString(36)+Math.random().toString(36).slice(2,8);
+  const $ = id => document.getElementById(id);
+  const STORAGE_KEY = "resetV3";
 
-const defaultHabits = [
- "Drink water",
- "Read or learn something",
- "Move or stretch",
- "Tidy my space",
- "Limit unnecessary scrolling"
-];
+  const today = () => {
+    const d = new Date();
+    return d.getFullYear() + "-" +
+      String(d.getMonth() + 1).padStart(2, "0") + "-" +
+      String(d.getDate()).padStart(2, "0");
+  };
 
-const guide = [
- ["Welcome to RESET","Build better habits, complete missions, and make progress one day at a time."],
- ["XP and levels","A completed habit gives 5 XP. A completed mission or focus session gives 10 XP. Every 100 XP advances a level."],
- ["Habit Garden","Add your own habits and tick them when completed. Daily habit completions reset on a new day."],
- ["Missions","Add tasks you want to finish and tick them off when completed."],
- ["Focus Timer","Choose a duration, tap Start, pause when needed, and finish the countdown to earn 10 XP."],
- ["Keep going","Track your streak, weekly challenge, and achievements. Your progress saves in this browser."]
-];
+  const uid = () => Date.now().toString(36) +
+    Math.random().toString(36).slice(2, 8);
 
-let data;
-let seconds = 1500;
-let interval = null;
-let running = false;
-let guideIndex = 0;
-let noticeTimer = null;
+  const defaultHabits = [
+    "Wake up on time",
+    "Read or study",
+    "Exercise or stretch",
+    "Drink enough water",
+    "Avoid unnecessary scrolling"
+  ];
 
-function fresh(){
- return {
-  username:"",
-  avatar:"🌱",
-  xp:0,
-  streak:0,
-  lastActive:"",
-  habits:defaultHabits.map(name=>({
-   id:uid(),name,done:false,doneDate:""
-  })),
-  missions:[],
-  challengeDays:[],
-  focusSessions:0,
-  achievements:[],
-  tutorialSeen:false
- };
-}
-
-function notify(message){
- const el=$("notice");
- el.textContent=message;
- el.style.display="block";
- clearTimeout(noticeTimer);
- noticeTimer=setTimeout(()=>el.style.display="none",2800);
-}
-
-function save(){
- try{
-  localStorage.setItem(STORAGE_KEY,JSON.stringify(data));
- }catch(error){
-  notify("Saving failed. Check your browser storage settings.");
- }
-}
-
-function safe(value){
- return String(value).replace(/[&<>"']/g,c=>({
-  "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
- }[c]));
-}
-
-function load(){
- try{
-  const raw=localStorage.getItem(STORAGE_KEY);
-  data=raw?{...fresh(),...JSON.parse(raw)}:fresh();
-
-  ["habits","missions","challengeDays","achievements"].forEach(key=>{
-   if(!Array.isArray(data[key]))data[key]=[];
-  });
-
-  data.xp=Math.max(0,Number(data.xp)||0);
-  data.streak=Math.max(0,Number(data.streak)||0);
-  data.focusSessions=Math.max(0,Number(data.focusSessions)||0);
-  data.username=String(data.username||"").slice(0,30);
-  data.avatar=String(data.avatar||"🌱");
-
-  data.habits.forEach(h=>{
-   if(!h.id)h.id=uid();
-   h.name=String(h.name||"Habit").slice(0,100);
-   if(h.doneDate!==today())h.done=false;
-  });
-
-  data.missions.forEach(m=>{
-   if(!m.id)m.id=uid();
-   m.name=String(m.name||"Mission").slice(0,120);
-  });
-
-  save();
- }catch(error){
-  data=fresh();
-  save();
-  setTimeout(()=>notify("A fresh profile was started because saved data could not be read."),300);
- }
-}
-
-function level(){
- return Math.floor(data.xp/100)+1;
-}
-
-function markActive(){
- const current=today();
-
- if(data.lastActive!==current){
-  const yesterdayDate=new Date();
-  yesterdayDate.setDate(yesterdayDate.getDate()-1);
-
-  const yesterday=yesterdayDate.getFullYear()+"-"+
-   String(yesterdayDate.getMonth()+1).padStart(2,"0")+"-"+
-   String(yesterdayDate.getDate()).padStart(2,"0");
-
-  data.streak=data.lastActive===yesterday?data.streak+1:1;
-  data.lastActive=current;
- }
-
- if(!data.challengeDays.includes(current)){
-  data.challengeDays.push(current);
- }
-}
-
-function renderStats(){
- const progress=data.xp%100;
-
- $("xp").textContent=data.xp;
- $("level").textContent=level();
- $("streak").textContent=data.streak;
- $("levelLabel").textContent=progress+" / 100 XP to level "+(level()+1);
- $("levelBar").style.width=progress+"%";
- $("welcome").textContent=data.username
-  ?"Welcome back, "+data.username+"!"
-  :"Your next chapter starts today.";
- $("profileButton").textContent=data.avatar+" "+(data.username||"Profile");
-
- const quotes=[
-  "Small progress is still progress.",
-  "Build a routine you can repeat.",
-  "One good decision at a time.",
-  "Consistency matters more than perfection.",
-  "Start small. Keep going."
- ];
- $("quote").textContent=quotes[new Date().getDate()%quotes.length];
-}
-
-function checkAchievements(){
- const habitsDone=data.habits.filter(h=>h.done).length;
- const missionsDone=data.missions.filter(m=>m.done).length;
-
- const checks=[
-  ["firstHabit","🌱 First Step","Complete a habit",habitsDone>0],
-  ["fiveHabits","🌿 Habit Builder","Complete five habits",habitsDone>=5],
-  ["firstMission","🎯 Mission Complete","Complete a mission",missionsDone>0],
-  ["hundredXP","💯 Century","Earn 100 XP",data.xp>=100],
-  ["levelThree","⚡ Level Three","Reach level 3",level()>=3],
-  ["firstFocus","⏱️ Focus Master","Finish a focus session",data.focusSessions>=1],
-  ["threeStreak","🔥 Consistency","Reach a 3-day streak",data.streak>=3],
-  ["sevenDays","🏆 Seven Days","Log activity on 7 days",data.challengeDays.length>=7]
- ];
-
- checks.forEach(check=>{
-  if(check[3]&&!data.achievements.includes(check[0])){
-   data.achievements.push(check[0]);
-  }
- });
- return checks;
-}
-
-function renderList(containerId,list,kind){
- const box=$(containerId);
- box.innerHTML="";
-
- if(!list.length){
-  box.innerHTML='<p class="empty">Nothing here yet. Add one above.</p>';
-  return;
- }
-
- list.forEach(item=>{
-  const isHabit=kind==="habit";
-  const points=isHabit?5:10;
-  const row=document.createElement("div");
-  row.className="item";
-
-  row.innerHTML=
-   '<input type="checkbox" data-kind="'+kind+'" data-id="'+safe(item.id)+'" aria-label="Complete item" '+(item.done?"checked":"")+'>'+
-   '<span class="words '+(item.done?"done":"")+'">'+safe(item.name)+'</span>'+
-   '<span class="points">+'+points+' XP</span>'+
-   '<button type="button" class="secondary" data-delete="'+kind+'" data-id="'+safe(item.id)+'" aria-label="Delete item">✕</button>';
-
-  box.appendChild(row);
- });
-}
-
-function renderChallenge(){
- const box=$("challenge");
- box.innerHTML="";
-
- const now=new Date();
- const monday=new Date(now);
- monday.setHours(12,0,0,0);
- monday.setDate(now.getDate()-(now.getDay()+6)%7);
-
- let count=0;
- const names=["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"];
-
- names.forEach((name,i)=>{
-  const d=new Date(monday);
-  d.setDate(monday.getDate()+i);
-
-  const key=d.getFullYear()+"-"+
-   String(d.getMonth()+1).padStart(2,"0")+"-"+
-   String(d.getDate()).padStart(2,"0");
-
-  const done=data.challengeDays.includes(key);
-  if(done)count++;
-
-  const row=document.createElement("div");
-  row.className="item";
-  row.innerHTML=
-   "<span>"+(done?"✅":"⬜")+"</span>"+
-   '<span class="words">'+name+'</span>'+
-   '<span class="points">'+(done?"Done":"Pending")+"</span>";
-
-  box.appendChild(row);
- });
-
- $("challengeSummary").textContent=count+" / 7 active days this week";
-}
-
-function renderAchievements(){
- const box=$("achievements");
- box.innerHTML="";
-
- checkAchievements().forEach(check=>{
-  const unlocked=data.achievements.includes(check[0]);
-  const row=document.createElement("div");
-  row.className="item";
-
-  row.innerHTML=
-   "<span>"+(unlocked?"🏅":"🔒")+"</span>"+
-   '<span class="words"><strong>'+safe(check[1])+
-   '</strong><br><span class="small">'+safe(check[2])+
-   "</span></span>"+
-   '<span class="points">'+(unlocked?"Unlocked":"Locked")+"</span>";
-
-  box.appendChild(row);
- });
-}
-
-function render(){
- renderStats();
- renderList("habits",data.habits,"habit");
- renderList("missions",data.missions,"mission");
-
- $("habitSummary").textContent=
-  data.habits.filter(h=>h.done).length+
-  " of "+data.habits.length+" habits completed today";
-
- renderChallenge();
- renderAchievements();
- save();
-}
-
-function addItem(formId,inputId,kind){
- $(formId).addEventListener("submit",event=>{
-  event.preventDefault();
-
-  const input=$(inputId);
-  const name=input.value.trim();
-
-  if(!name){
-   notify("Please type something first.");
-   input.focus();
-   return;
+  function freshData() {
+    return {
+      username: "",
+      avatar: "🌱",
+      habits: defaultHabits.map(name => ({
+        id: uid(), name, doneDate: ""
+      })),
+      missions: [],
+      streak: 0,
+      lastActive: "",
+      challengeDays: [],
+      focusSessions: 0,
+      tutorialSeen: false
+    };
   }
 
-  const item={id:uid(),name,done:false};
+  let data = freshData();
+  let timerRemaining = 1500;
+  let timerInterval = null;
+  let timerRunning = false;
+  let toastTimeout = null;
 
-  if(kind==="habit"){
-   item.doneDate="";
-   data.habits.push(item);
-  }else{
-   data.missions.push(item);
+  function loadData() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return;
+      const saved = JSON.parse(raw);
+      if (!saved || typeof saved !== "object") return;
+
+      data = { ...freshData(), ...saved };
+      if (!Array.isArray(data.habits)) data.habits = [];
+      if (!Array.isArray(data.missions)) data.missions = [];
+      if (!Array.isArray(data.challengeDays)) data.challengeDays = [];
+
+      data.habits = data.habits.filter(x => x && typeof x.name === "string")
+        .map(x => ({ id: x.id || uid(), name: x.name, doneDate: x.doneDate || "" }));
+
+      data.missions = data.missions.filter(x => x && typeof x.name === "string")
+        .map(x => ({ id: x.id || uid(), name: x.name, done: !!x.done }));
+    } catch (err) {
+      console.error("Could not load RESET data:", err);
+      data = freshData();
+    }
   }
 
-  input.value="";
-  render();
-  notify(kind==="habit"?"Habit added! 🌱":"Mission added! 🎯");
-  input.focus();
- });
-}
+  function saveData() {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    } catch (err) {
+      console.error("Could not save RESET data:", err);
+      notify("Could not save data. Check your browser storage.");
+    }
+  }
 
-addItem("habitForm","habitInput","habit");
-addItem("missionForm","missionInput","mission");
+  function notify(message) {
+    const toast = $("toast");
+    toast.textContent = message;
+    toast.style.display = "block";
+    clearTimeout(toastTimeout);
+    toastTimeout = setTimeout(() => {
+      toast.style.display = "none";
+    }, 2400);
+  }
 
-document.addEventListener("change",event=>{
- const el=event.target;
- if(!el.matches("input[data-kind]"))return;
+  function escapeHTML(value) {
+    return String(value).replace(/[&<>"']/g, ch => ({
+      "&": "&amp;", "<": "&lt;", ">": "&gt;",
+      '"': "&quot;", "'": "&#39;"
+    })[ch]);
+  }
 
- const isHabit=el.dataset.kind==="habit";
- const list=isHabit?data.habits:data.missions;
- const item=list.find(x=>x.id===el.dataset.id);
+  function completedHabitsToday() {
+    return data.habits.filter(h => h.doneDate === today()).length;
+  }
 
- if(!item||item.done===el.checked)return;
+  function totalXP() {
+    return completedHabitsToday() * 5 +
+      data.missions.filter(m => m.done).length * 10 +
+      (Number(data.focusSessions) || 0) * 10;
+  }
 
- item.done=el.checked;
+  function updateStreak() {
+    const activeToday = completedHabitsToday() > 0;
+    if (!activeToday || data.lastActive === today()) return;
 
- if(isHabit){
-  item.doneDate=el.checked?today():"";
- }
+    const yesterdayDate = new Date();
+    yesterdayDate.setDate(yesterdayDate.getDate() - 1);
+    const yesterday = yesterdayDate.getFullYear() + "-" +
+      String(yesterdayDate.getMonth() + 1).padStart(2, "0") + "-" +
+      String(yesterdayDate.getDate()).padStart(2, "0");
 
- const points=isHabit?5:10;
+    data.streak = data.lastActive === yesterday
+      ? (Number(data.streak) || 0) + 1 : 1;
+    data.lastActive = today();
 
- if(el.checked){
-  data.xp+=points;
-  markActive();
-  notify("+"+points+" XP! "+(isHabit?"🌱":"🎯"));
- }else{
-  data.xp=Math.max(0,data.xp-points);
-  notify("Completion undone.");
- }
+    if (!data.challengeDays.includes(today())) {
+      data.challengeDays.push(today());
+    }
+  }
 
- render();
-});
+  function renderHabits() {
+    const list = $("habitList");
+    list.replaceChildren();
 
-document.addEventListener("click",event=>{
- const button=event.target.closest("button[data-delete]");
- if(!button)return;
+    if (data.habits.length === 0) {
+      list.innerHTML = '<p class="small">No habits yet. Add your first habit above!</p>';
+    }
 
- if(!confirm("Delete this item?"))return;
+    data.habits.forEach(habit => {
+      const done = habit.doneDate === today();
+      const row = document.createElement("div");
+      row.className = "item";
+      row.innerHTML = `
+        <input class="check habitCheck" type="checkbox"
+          data-id="${escapeHTML(habit.id)}" ${done ? "checked" : ""}
+          aria-label="Complete ${escapeHTML(habit.name)}">
+        <span class="item-name ${done ? "done" : ""}">${escapeHTML(habit.name)}</span>
+        <button class="danger deleteHabit" type="button"
+          data-id="${escapeHTML(habit.id)}" aria-label="Delete habit">✕</button>`;
+      list.appendChild(row);
+    });
 
- if(button.dataset.delete==="habit"){
-  data.habits=data.habits.filter(x=>x.id!==button.dataset.id);
- }else{
-  data.missions=data.missions.filter(x=>x.id!==button.dataset.id);
- }
+    $("habitCount").textContent =
+      `${completedHabitsToday()} of ${data.habits.length} habits completed today`;
+  }
 
- render();
- notify("Item deleted.");
-});
+  function renderMissions() {
+    const list = $("missionList");
+    list.replaceChildren();
 
-// PROFILE
-$("profileButton").addEventListener("click",()=>{
- $("username").value=data.username;
- $("avatar").value=data.avatar;
- $("profileDialog").showModal();
-});
+    if (data.missions.length === 0) {
+      list.innerHTML = '<p class="small">No missions yet. Add your first mission above!</p>';
+    }
 
-$("closeProfile").addEventListener("click",()=>{
- $("profileDialog").close();
-});
+    data.missions.forEach(mission => {
+      const row = document.createElement("div");
+      row.className = "item";
+      row.innerHTML = `
+        <input class="check missionCheck" type="checkbox"
+          data-id="${escapeHTML(mission.id)}" ${mission.done ? "checked" : ""}
+          aria-label="Complete ${escapeHTML(mission.name)}">
+        <span class="item-name ${mission.done ? "done" : ""}">${escapeHTML(mission.name)}</span>
+        <button class="danger deleteMission" type="button"
+          data-id="${escapeHTML(mission.id)}" aria-label="Delete mission">✕</button>`;
+      list.appendChild(row);
+    });
 
-$("saveProfile").addEventListener("click",()=>{
- data.username=$("username").value.trim().slice(0,30);
- data.avatar=$("avatar").value;
- render();
- $("profileDialog").close();
- notify("Profile saved!");
-});
+    $("missionCount").textContent =
+      `${data.missions.filter(m => m.done).length} of ${data.missions.length} missions completed`;
+  }
 
-// FOCUS TIMER
-function stopTimer(){
- if(interval!==null)clearInterval(interval);
- interval=null;
- running=false;
-}
+  function renderProgress() {
+    const xp = totalXP();
+    const level = Math.floor(xp / 100) + 1;
+    const levelXP = xp % 100;
 
-function paintClock(){
- seconds=Math.max(0,seconds);
- $("clock").textContent=
-  String(Math.floor(seconds/60)).padStart(2,"0")+":"+
-  String(seconds%60).padStart(2,"0");
-}
+    $("xpDisplay").textContent = xp;
+    $("levelDisplay").textContent = level;
+    $("streakDisplay").textContent = data.streak || 0;
+    $("levelText").textContent = `${levelXP} / 100 XP to next level`;
+    $("xpBar").style.width = levelXP + "%";
 
-function resetTimer(){
- stopTimer();
- seconds=Number($("minutes").value)*60;
- paintClock();
- $("timerMessage").textContent="Ready when you are.";
- $("startTimer").disabled=false;
-}
+    const days = Math.min(new Set(data.challengeDays).size, 7);
+    $("challengeBar").style.width = (days / 7 * 100) + "%";
+    $("challengeText").textContent =
+      `${days} of 7 active days recorded. Keep going!`;
 
-function finishTimer(){
- stopTimer();
- seconds=0;
- paintClock();
- $("startTimer").disabled=false;
- $("timerMessage").textContent="Session complete. Great work!";
+    const achievements = [];
+    if (completedHabitsToday() >= 1) achievements.push("🌱 First habit completed");
+    if (completedHabitsToday() >= 5) achievements.push("🌿 Five habits today");
+    if (data.missions.some(m => m.done)) achievements.push("🎯 Mission accomplished");
+    if ((data.focusSessions || 0) >= 1) achievements.push("⏱️ First focus session");
+    if (xp >= 100) achievements.push("⭐ Reached 100 XP");
+    if ((data.streak || 0) >= 7) achievements.push("🔥 Seven-day streak");
 
- data.focusSessions++;
- data.xp+=10;
- markActive();
- render();
+    $("achievementText").textContent = achievements.length
+      ? achievements[achievements.length - 1]
+      : "🏅 Your journey starts today.";
 
- notify("Focus session complete! +10 XP 🎉");
+    $("achievementList").textContent = achievements.length
+      ? achievements.join(" • ")
+      : "Complete a habit, mission or focus session to unlock your first achievement.";
+  }
 
- if(navigator.vibrate)navigator.vibrate(150);
-}
+  function renderProfile() {
+    $("usernameDisplay").textContent = data.username || "Your Profile";
+    $("avatarDisplay").textContent = data.avatar || "🌱";
+  }
 
-$("minutes").addEventListener("change",resetTimer);
+  function render() {
+    renderHabits();
+    renderMissions();
+    renderProgress();
+    renderProfile();
+    saveData();
+  }
 
-$("startTimer").addEventListener("click",()=>{
- if(running)return;
+  // These submit handlers are attached directly to the two forms.
+  // Each Add button submits its own form and adds an item to the correct list.
+  $("habitForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+    const input = $("habitInput");
+    const name = input.value.trim();
 
- if(seconds<=0)resetTimer();
+    if (!name) {
+      notify("Type a habit first.");
+      input.focus();
+      return;
+    }
 
- running=true;
- $("startTimer").disabled=true;
- $("timerMessage").textContent="Focus on one thing at a time.";
+    data.habits.push({ id: uid(), name: name, doneDate: "" });
+    input.value = "";
+    render();
+    notify("Habit added! 🌱");
+    input.focus();
+  });
 
- const endTime=Date.now()+seconds*1000;
+  $("missionForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+    const input = $("missionInput");
+    const name = input.value.trim();
 
- interval=setInterval(()=>{
-  seconds=Math.ceil((endTime-Date.now())/1000);
-  paintClock();
+    if (!name) {
+      notify("Type a mission first.");
+      input.focus();
+      return;
+    }
 
-  if(seconds<=0)finishTimer();
- },250);
-});
+    data.missions.push({ id: uid(), name: name, done: false });
+    input.value = "";
+    render();
+    notify("Mission added! 🎯");
+    input.focus();
+  });
 
-$("pauseTimer").addEventListener("click",()=>{
- if(!running){
-  notify("Timer is already paused.");
-  return;
- }
+  $("habitList").addEventListener("change", function(event) {
+    if (!event.target.classList.contains("habitCheck")) return;
 
- stopTimer();
- paintClock();
- $("startTimer").disabled=false;
- $("timerMessage").textContent="Paused. Tap Start to resume.";
-});
+    const habit = data.habits.find(h => h.id === event.target.dataset.id);
+    if (!habit) return;
 
-$("resetTimer").addEventListener("click",resetTimer);
+    habit.doneDate = event.target.checked ? today() : "";
+    if (event.target.checked) {
+      updateStreak();
+      notify("+5 XP! Keep it up 🌱");
+    }
+    render();
+  });
 
-// HELP TUTORIAL
-function paintGuide(){
- const item=guide[guideIndex];
+  $("missionList").addEventListener("change", function(event) {
+    if (!event.target.classList.contains("missionCheck")) return;
 
- $("guideCount").textContent=
-  "RESET GUIDE • "+(guideIndex+1)+"/"+guide.length;
- $("guideTitle").textContent=item[0];
- $("guideText").textContent=item[1];
- $("guideBack").disabled=guideIndex===0;
- $("guideNext").textContent=
-  guideIndex===guide.length-1?"Finish":"Next";
-}
+    const mission = data.missions.find(m => m.id === event.target.dataset.id);
+    if (!mission) return;
 
-function showGuide(){
- guideIndex=0;
- paintGuide();
- if(!$("helpDialog").open)$("helpDialog").showModal();
-}
+    mission.done = event.target.checked;
+    if (mission.done) notify("+10 XP! Mission completed 🎯");
+    render();
+  });
 
-function finishGuide(){
- data.tutorialSeen=true;
- save();
- $("helpDialog").close();
-}
+  $("habitList").addEventListener("click", function(event) {
+    const button = event.target.closest(".deleteHabit");
+    if (!button) return;
+    data.habits = data.habits.filter(h => h.id !== button.dataset.id);
+    render();
+    notify("Habit deleted.");
+  });
 
-$("helpButton").addEventListener("click",showGuide);
+  $("missionList").addEventListener("click", function(event) {
+    const button = event.target.closest(".deleteMission");
+    if (!button) return;
+    data.missions = data.missions.filter(m => m.id !== button.dataset.id);
+    render();
+    notify("Mission deleted.");
+  });
 
-$("guideBack").addEventListener("click",()=>{
- if(guideIndex>0){
-  guideIndex--;
-  paintGuide();
- }
-});
+  // Focus timer
+  function formatTime(seconds) {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return String(mins).padStart(2, "0") + ":" +
+      String(secs).padStart(2, "0");
+  }
 
-$("guideNext").addEventListener("click",()=>{
- if(guideIndex<guide.length-1){
-  guideIndex++;
-  paintGuide();
- }else{
-  finishGuide();
- }
-});
+  function showTimer() {
+    $("timerDisplay").textContent = formatTime(timerRemaining);
+  }
 
-$("guideFinish").addEventListener("click",finishGuide);
+  function stopTimer() {
+    if (timerInterval !== null) clearInterval(timerInterval);
+    timerInterval = null;
+    timerRunning = false;
+  }
 
-// RESET ALL DATA
-$("clearButton").addEventListener("click",()=>{
- if(!confirm("Reset ALL RESET data? This cannot be undone."))return;
+  function startTimer() {
+    if (timerRunning) return;
+    if (timerRemaining <= 0) {
+      timerRemaining = Number($("durationSelect").value);
+      showTimer();
+    }
 
- stopTimer();
- data=fresh();
- render();
- resetTimer();
- notify("All data has been reset.");
-});
-
-// START APP
-load();
-render();
-resetTimer();
-
-if(!data.
+    timerRunning = true;
+    $("timerStatus").textContent
